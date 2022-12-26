@@ -1,0 +1,148 @@
+@font-face {
+    font-family: 'bebas_kairegular';
+    src: url('bebaskai-webfont.woff2') format('woff2'),
+    url('bebaskai-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    font-family: 'bebas_kairegular';
+    font-weight: lighter;
+    font-size: 20px;
+    margin: 0;
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.site-header {
+    border-bottom: 1px solid #ccc;
+    padding: .5em 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.site-identity h1 {
+    font-size: 1.5em;
+    margin: .6em 0;
+    display: inline-block;
+}
+
+
+.site-navigation ul,
+.site-navigation li {
+    margin: 0;
+    padding: 0;
+}
+
+.site-navigation li {
+    display: inline-block;
+    margin: 1.4em 1em 1em 1em;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    max-width: 200px;
+}
+table{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    cellpadding:"0";
+    border:0;
+    align:center;
+    cellspacing:0;
+}
+/* Style the Image Used to Trigger the Modal */
+.myImages {
+    cursor: pointer;
+    transition: 0.3s;
+}
+.text{
+    box-shadow: inset 0 0 10px #000000;
+    opacity:0;
+}
+
+.myImages:hover .text {
+    opacity:0.6;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(240,240,240,0.8); /* Black w/ opacity */
+    box-shadow: #0a0a0a;
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    align-items: center;
+    height: 85%;
+    max-height: 900%;
+    box-shadow: #000b1d;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.2s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #424242;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
