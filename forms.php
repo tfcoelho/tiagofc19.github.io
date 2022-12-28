@@ -1,9 +1,9 @@
 <?php
-if(isset($_POST['NAME']) and isset($_POST['ADDRESS']) and isset($_POST['MESSAGE']))
+if(isset($_GET['NAME']) and isset($_GET['ADDRESS']) and isset($_GET['MESSAGE']))
 {
-    $name=$_POST['NAME'];
-    $address=$_POST['ADDRESS'];
-    $message=$_POST['MESSAGE'];
+    $name=$_GET['NAME'];
+    $address=$_GET['ADDRESS'];
+    $message=$_GET['MESSAGE'];
 
     $email_subject = "New Form submission";
 
