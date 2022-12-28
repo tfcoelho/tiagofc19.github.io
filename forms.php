@@ -10,11 +10,19 @@ if(isset($_POST['NAME']) and isset($_POST['ADDRESS']) and isset($_POST['MESSAGE'
     $email_body = "You have received a new message from the user $name.\n".
         "Here is the message:\n $message".
 
-    $to = "tiagofc2000@gmail.com, tfi.coelho@campus.fct.unl.pt";
+    $to = "tiagofc2000@gmail.com";
 
     $headers = "Reply-To: $address \r\n";
 
-    mail($to,$email_subject,$email_body,$headers);
 
+    if(mail($to,$email_subject,$email_body,$headers)) {
+
+        echo 'Your mail has been sent successfully.';
+
+    } else{
+
+        echo 'Unable to send email. Please try again.';
+
+    }
 }
 ?>
