@@ -11,7 +11,7 @@
       margin-left: auto;
       margin-right: auto;
       position: relative;
-      width: 600px;
+      width: 95%;
     }
     .image {
       display: block;
@@ -29,15 +29,17 @@
       width: 100%;
       opacity: 0;
       transition: .5s ease;
-      background-color: #ffffff;
     }
 
     .container2:hover .overlay {
-      opacity: 0.9;
+      opacity: 1;
+    }
+    .container2:hover .text2 {
+      opacity: 1;
     }
 
     .text2 {
-      color: #000000;
+      color: #595959;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -51,32 +53,55 @@
 <body bgcolor="#1F1F1F">
 <header class="container" style="display: flex; height: 100px; padding-top: 70px">
   <div style="width: 33.3332%; text-align: left; padding-top: 30px">
-    <table>
-      <td style="width: 50%">
-        <a href="index.html"style="padding-left: 100px"> WORK </a>
-      </td>
-      <td style="width: 50%; padding-left: 10px; padding-top: 4px">
-        <a href = "mailto: tiagofc2000@gmail.com"><img class = "myImages" id="myImg" src="Images/mail2.png" style="width: 25px;"></a>
-      </td>
-    </table>
+    <a href="index.html"style="padding-left: 100px"> WORK </a></td>
+    <a href="contact.html" style="padding-left: 20px"> CONTACT </a>
   </div>
   <div style="flex-grow: 1; width: 33.3332%; padding-top: 0px">
-    <a><img src="Images/Signature.png" class ="center"> </a>
+    <a href="index.html"><img src="Images/Signature.png" class ="center"> </a>
+
   </div>
   <div style="flex-grow: 1;width: 33.3332%">
   </div>
 </header>
 <div style="padding-top: 100px"></div>
-<div class="container2">
-  <img src="Images/ass2.png" alt="" class="image">
-  <a href="matte.html">
-    <div class="overlay">
-      <div class="text2">
-        <p style="font-size: 25px;font-weight: normal; line-height: 0.5">MATTE</p>
-        <P style="line-height: 0.3">2022</P>
-      </div>
-    </div>
-  </a>
-</div>
+
+  <table style="width:70%; align: center">
+    <tr style="width:50%; align:center">
+      <th>
+        <div class="container2">
+          <img src="Images/ass3.png" alt="" class="image">
+          <a href="matte.html">
+            <div class="overlay">
+              <img src="Images/ass5.png" alt="" class="image">
+            </div>
+            <div class="overlay" style="opacity: 1">
+              <div class="text2">
+                <p style="font-size: 25px;font-weight: normal; line-height: 0.9; opacity: 1">PERSONAL COLLECTION</p>
+                <p style="font-size: 20px;font-weight: normal; line-height: 0.3; padding-top: 0px">MATTE</p>
+                <P style="line-height: 0.3">2022</P>
+              </div>
+            </div>
+          </a>
+        </div>
+      </th>
+      <th>
+        <div class="container2">
+          <img src="Images/assc.png" alt="" class="image">
+          <a href="bold.html">
+            <div class="overlay">
+              <img src="Images/ass2.png" alt="" class="image">
+            </div>
+            <div class="overlay" style="opacity: 1">
+              <div class="text2" >
+                <p style="font-size: 25px;font-weight: normal; line-height: 0.9; padding-top: 0px">EVENT Photography</p>
+                <p style="font-size: 20px;font-weight: normal; line-height: 0.3; padding-top: 0px">BOLD</p>
+                <P style="line-height: 0.3; ">2023</P>
+              </div>
+            </div>
+          </a>
+        </div>
+      </th>
+    </tr>
+  </table>
 </body>
 </html>
