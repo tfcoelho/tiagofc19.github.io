@@ -97,24 +97,26 @@ table{
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    z-index: 1; /* Sit on top */ /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow: clip; /* Enable scroll if needed */
     background-color: rgba(240,240,240,0.8); /* Black w/ opacity */
     box-shadow: #0a0a0a;
 }
 
 /* Modal Content (Image) */
 .modal-content {
+    vertical-align: center;
     margin: auto;
-    display: block;
+    display: flex;
     align-items: center;
-    height: 85%;
-    max-height: 900%;
+    justify-content: center;
+    align-self: center;
+    max-height: 85%;
+    max-width: 85%;
     box-shadow: #000b1d;
 }
 
