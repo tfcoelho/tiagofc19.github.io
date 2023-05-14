@@ -341,6 +341,25 @@
     // and the caption in the modal
     var captionText = document.getElementById("caption");
 
+    modalImg.onload = function() {
+        var imageheight = modalImg.height;
+        var imagewidth = modalImg.width;
+        var viewportHeight = window.innerHeight;
+        var viewportWidth = window.innerWidth;
+
+        if ((imageheight / imagewidth) > (viewportHeight / viewportWidth)) {
+            paddingTop = 0.075 * viewportHeight;
+            var modalContent = document.querySelector(".modal-content");
+            modalContent.style.paddingTop = paddingTop + "px";
+        }
+        else{
+            width = viewportWidth * 0.85;
+            height = width * imageheight / imagewidth;
+            paddingTop = viewportHeight * (1-height/viewportHeight)/2;
+            var modalContent = document.querySelector(".modal-content");
+            modalContent.style.paddingTop = paddingTop + "px";
+        }
+    }
     // Go through all of the images with our custom class
     for (var i = 0; i < images.length; i++) {
         var img = images[i];
