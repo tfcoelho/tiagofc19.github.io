@@ -296,7 +296,7 @@
             modalContent.style.paddingTop = paddingTop + "px";
         }
     }
-    // Go through all of the images with our custom class
+    // Go through all of the images with the custom class
     for (var i = 0; i < images.length; i++) {
         var img = images[i];
         // and attach our click listener for this image.
@@ -312,6 +312,12 @@
     span.onclick = function() {
         modal.style.display = "none";
     }
+    document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 27) {
+            modal.style.display = "none";
+        }
+    };
 
 </script>
 </body>
