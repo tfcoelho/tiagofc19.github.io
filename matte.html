@@ -5,19 +5,36 @@
     <link rel="stylesheet" href="main.css">
     <title>Tiago's Portfolio</title>
     <link rel="icon" href="Images/ass.webp">
+
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 70px;
+            height: 100px;
+        }
+
+        .header-item {
+            flex: 1; /* Ensures that each header item takes equal space */
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body bgcolor="#1F1F1F">
-<header class="container" style="display: flex; height: 100px; padding-top: 70px">
-    <div style="width: 33.3332%; text-align: center; padding-top: 30px">
-        <a href = "mailto: info@tfcoelho.com"> CONTACT </a>
+<header class="header-container">
+    <div class="header-item">
+        <a href="mailto:info@tfcoelho.com">CONTACT</a>
     </div>
-    <div style="flex-grow: 1; width: 33.3332%; padding-top: 0px">
-        <a href="index.html"><img src="Images/Signature.png" class ="center"> </a>
+    <div class="header-item">
+        <a href="index.html"><img src="Images/Signature.png" alt="Signature" class="center"></a>
     </div>
-    <div style="flex-grow: 1;width: 33.3332%; text-align: center">
-        <a href="https://www.instagram.com/_tiagocoelho_/"><img src="Images/insta.png" style="width: 20px; padding-top: 33px"> </a>
+    <div class="header-item">
+        <a href="https://www.instagram.com/_tiagocoelho_/"><img src="Images/insta.png" alt="Instagram" style="width: 20px;"></a>
     </div>
 </header>
+
 <div style="text-align: center; padding-top: 30px " >
     <p STYLE="font-size: 35px; color: #FFFFFF; font-weight: 100; line-height: 0.5">MATTE</p>
     <p STYLE="color: #8a8788; font-size: 20px;line-height: 1"> THE BEAUTY OF DIFFUSE REFLECTION </p>

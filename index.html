@@ -2,29 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="main.css">
   <title>Tiago's Portfolio</title>
+  <link rel="stylesheet" href="main.css">
   <link rel="icon" href="Images/ass.webp">
   <style>
-    .container2 {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      width: 95%;
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 70px;
+      height: 100px;
     }
-    .image {
-      display: block;
+
+    .header-item {
+      flex: 1; /* Ensures that each header item takes equal space */
+      text-align: center;
+    }
+
+    .gallery {
+      width: 65%;
+      align: center;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px; /* Spacing between items */
+      padding-top: 100px;
+    }
+
+    .container2 {
+      flex: 1 1 100%; /* Make each container take full width below 768px */
+      position: relative;
+      width: 50%;
+      margin: auto;
+    }
+
+    .image, .overlay img {
       width: 100%;
       height: auto;
+      opacity: 0.9;
     }
 
     .overlay {
       position: absolute;
       top: 0;
-      bottom: 0;
       left: 0;
       right: 0;
+      bottom: 0;
       height: 100%;
       width: 100%;
       opacity: 0;
@@ -34,76 +58,80 @@
     .container2:hover .overlay {
       opacity: 1;
     }
-    .container2:hover .text2 {
-      opacity: 1;
-    }
 
     .text2 {
       color: #595959;
       position: absolute;
       top: 50%;
       left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 1;
+    }
+
+
+
+    @media only screen and (max-width: 768px) {
+      .gallery {
+        flex-direction: column;
+      }
+
+      .container2 {
+        width: 100%;
+      }
+    }
+
+    .footer {
+      padding-top: 150px;
       text-align: center;
     }
   </style>
 </head>
 <body>
-<header class="container" style="display: flex; height: 100px; padding-top: 70px">
-  <div style="width: 33.3332%; text-align: center; padding-top: 30px">
-    <a href = "mailto: info@tfcoelho.com" style="padding-left: 20px"> CONTACT </a>
+
+<header class="header-container">
+  <div class="header-item">
+    <a href="mailto:info@tfcoelho.com">CONTACT</a>
   </div>
-  <div style="flex-grow: 1; width: 33.3332%; padding-top: 0px">
-    <a href="index.html"><img src="Images/Signature.png" class ="center"> </a>
+  <div class="header-item">
+    <a href="index.html"><img src="Images/Signature.png" alt="Signature" class="center"></a>
   </div>
-  <div style="flex-grow: 1;width: 33.3332%; text-align: center">
-    <a href="https://www.instagram.com/_tiagocoelho_/"><img src="Images/insta.png" style="width: 20px; padding-top: 33px"> </a>
+  <div class="header-item">
+    <a href="https://www.instagram.com/_tiagocoelho_/"><img src="Images/insta.png" alt="Instagram" style="width: 20px;"></a>
   </div>
 </header>
-<div style="padding-top: 100px"></div>
-  <table style="width:70%; align: center">
-    <tr style="width:50%; align:center">
-      <th>
-        <div class="container2">
-          <img src="Images/ass3.webp" alt="" class="image" style="opacity: 0.9">
-          <a href="matte.html">
-            <div class="overlay">
-              <img src="Images/ass5.webp" alt="" class="image">
-            </div>
-            <div class="overlay" style="opacity: 1">
-              <div class="text2">
-                <p style="font-size: 25px;font-weight: normal; line-height: 0.9; opacity: 1">PERSONAL COLLECTION</p>
-                <p style="font-size: 20px;font-weight: normal; line-height: 0.3; padding-top: 0px">MATTE</p>
-                <P style="line-height: 0.3">2022</P>
-              </div>
-            </div>
-          </a>
-        </div>
-      </th>
-      <th>
-        <div class="container2">
-          <img src="Images/assc.webp" alt="" class="image" style="opacity: 0.9">
-          <a href="bold.html">
-            <div class="overlay">
-              <img src="Images/ass2.webp" alt="" class="image">
-            </div>
-            <div class="overlay" style="opacity: 1">
-              <div class="text2" >
-                <p style="font-size: 25px;font-weight: normal; line-height: 0.9; padding-top: 0px">EVENT Photography</p>
-                <p style="font-size: 20px;font-weight: normal; line-height: 0.3; padding-top: 0px">BOLD</p>
-                <P style="line-height: 0.3; ">2023</P>
-              </div>
-            </div>
-          </a>
-        </div>
-      </th>
-    </tr>
-  </table>
 
-<div class = footer style="padding-top: 150px">
-  <p> 2024 © All rights reserved | Tiago Coelho</p>
+<div class="gallery">
+  <div class="container2">
+    <a href="matte.html">
+      <img src="Images/ass3.webp" alt="" class="image">
+      <div class="overlay">
+        <img src="Images/ass5.webp" alt="" class="image">
+      </div>
+        <div class="text2">
+          <p style="font-size: 30px;font-weight: normal; line-height: 0.9; opacity: 1">PERSONAL COLLECTION</p>
+          <p style="font-size: 20px;font-weight: normal; line-height: 0.3; padding-top: 0px">MATTE</p>
+          <p style="line-height: 0.3">2022</p>
+        </div>
+    </a>
+  </div>
+  <div class="container2">
+    <a href="bold.html">
+      <img src="Images/assc.webp" alt="" class="image">
+      <div class="overlay">
+        <img src="Images/ass2.webp" alt="" class="image">
+      </div>
+        <div class="text2">
+          <p style="font-size: 30px;font-weight: normal; line-height: 0.9; opacity: 1">EVENT Photography</p>
+          <p style="font-size: 20px;font-weight: normal; line-height: 0.3; padding-top: 0px">BOLD</p>
+          <p style="line-height: 0.3">2023</p>
+        </div>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  <p>2024 © All rights reserved | Tiago Coelho</p>
 </div>
 
 </body>
