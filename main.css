@@ -97,6 +97,16 @@ table{
     font-size: 12px;
 }
 
+.desktop{
+    position: center;
+    left: 0;
+    bottom: 50px;
+    width: 100%;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 12px;
+}
+
 .myImages:hover{
     opacity:0.8;
 }
