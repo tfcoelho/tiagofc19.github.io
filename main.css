@@ -191,20 +191,3 @@ table{
         width: 100%;
     }
 }
-
-/* Child Text Container */
-.content_img div{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    font-weight: lighter;
-    font-size: 15px;
-    margin-bottom: 4px;
-    opacity: 0;
-    padding-top: 10%;
-    vertical-align: text-top;
-    width: 100%;
-    visibility: hidden;
-    -webkit-transition: visibility 0s, opacity 0.5s linear;
-    transition: visibility 0s, opacity 0.5s linear;
-}
