@@ -182,12 +182,6 @@ table{
     }
 }
 
-/* Parent Container */
-.content_img{
-    position: relative;
-    float: left;
-}
-
 /* Child Text Container */
 .content_img div{
     position: absolute;
@@ -204,16 +198,3 @@ table{
     -webkit-transition: visibility 0s, opacity 0.5s linear;
     transition: visibility 0s, opacity 0.5s linear;
 }
-
-/* Hover on Parent Container
-
-.content_img:hover{
-    cursor: pointer;
-}
-
-
-.content_img:hover div{
-    visibility: visible;
-    opacity: 0.8;
-}
-+/
