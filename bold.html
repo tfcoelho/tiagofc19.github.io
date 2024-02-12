@@ -156,7 +156,7 @@
     </tr>
 </table>
 
-<table loading="lazy" style="padding-top: 5%; width: 40%; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
+<table loading="lazy"  class= "Hide" style="padding-top: 5%; width: 40%; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:50%">
             <div class="content_img">
@@ -168,7 +168,7 @@
 
 
 
-<table loading="lazy" style="padding-top: 5%;width: 67%;padding-bottom: 0px; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
+<table loading="lazy" class= "Hide"  style="padding-top: 5%;width: 67%;padding-bottom: 0px; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:20%">
             <div class="content_img">
@@ -195,7 +195,7 @@
         </th>
     </tr>
 </table>
-<table loading="lazy" style="width: 67%;padding-top: 2px;">
+<table loading="lazy"  class= "Hide"  style="width: 67%;padding-top: 2px;">
     <tr>
         <th style="width:67%">
             <div class="content_img">
@@ -276,57 +276,55 @@
 </div>
 
 <script class = "Hide">
-    // create references to the modal...
-    var modal = document.getElementById('myModal');
-    // to all images -- note I'm using a class!
-    var images = document.getElementsByClassName('myImages');
-    // the image in the modal
-    var modalImg = document.getElementById("img01");
-    // and the caption in the modal
-    var captionText = document.getElementById("caption");
+        // create references to the modal...
+        var modal = document.getElementById('myModal');
+        // to all images -- note I'm using a class!
+        var images = document.getElementsByClassName('myImages');
+        // the image in the modal
+        var modalImg = document.getElementById("img01");
+        // and the caption in the modal
+        var captionText = document.getElementById("caption");
 
-    modalImg.onload = function() {
-        var imageheight = modalImg.height;
-        var imagewidth = modalImg.width;
-        var viewportHeight = window.innerHeight;
-        var viewportWidth = window.innerWidth;
+        modalImg.onload = function () {
+            var imageheight = modalImg.height;
+            var imagewidth = modalImg.width;
+            var viewportHeight = window.innerHeight;
+            var viewportWidth = window.innerWidth;
 
-        if ((imageheight / imagewidth) > (viewportHeight / viewportWidth)) {
-            paddingTop = 0.075 * viewportHeight;
-            var modalContent = document.querySelector(".modal-content");
-            modalContent.style.paddingTop = paddingTop + "px";
+            if ((imageheight / imagewidth) > (viewportHeight / viewportWidth)) {
+                paddingTop = 0.075 * viewportHeight;
+                var modalContent = document.querySelector(".modal-content");
+                modalContent.style.paddingTop = paddingTop + "px";
+            } else {
+                width = viewportWidth * 0.85;
+                height = width * imageheight / imagewidth;
+                paddingTop = viewportHeight * (1 - height / viewportHeight) / 2;
+                var modalContent = document.querySelector(".modal-content");
+                modalContent.style.paddingTop = paddingTop + "px";
+            }
         }
-        else{
-            width = viewportWidth * 0.85;
-            height = width * imageheight / imagewidth;
-            paddingTop = viewportHeight * (1-height/viewportHeight)/2;
-            var modalContent = document.querySelector(".modal-content");
-            modalContent.style.paddingTop = paddingTop + "px";
+        // Go through all of the images with the custom class
+        for (var i = 0; i < images.length; i++) {
+            var img = images[i];
+            // and attach our click listener for this image.
+            img.onclick = function (evt) {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
         }
-    }
-    // Go through all of the images with the custom class
-    for (var i = 0; i < images.length; i++) {
-        var img = images[i];
-        // and attach our click listener for this image.
-        img.onclick = function(evt) {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-        }
-    }
 
-    var span = document.getElementsByClassName("close")[0];
+        var span = document.getElementsByClassName("close")[0];
 
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    document.onkeydown = function(evt) {
-        evt = evt || window.event;
-        if (evt.keyCode == 27) {
+        span.onclick = function () {
             modal.style.display = "none";
         }
-    };
-
+        document.onkeydown = function (evt) {
+            evt = evt || window.event;
+            if (evt.keyCode == 27) {
+                modal.style.display = "none";
+            }
+        };
 </script>
 
 </body>
