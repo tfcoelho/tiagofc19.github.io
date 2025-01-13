@@ -8,42 +8,111 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #A8CFFF, #F5E3FF); /* Match Canva's background */
+      background: linear-gradient(to bottom, #A8CFFF, #F5E3FF); /* Seamless gradient background */
       font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevent scrolling */
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* Full screen height */
-      overflow: hidden; /* Prevent scrolling */
+      height: 100vh; /* Full page height */
     }
 
-    .schedule-container {
-      position: relative;
-      width: 80%; /* Adjust width */
-      max-width: 1200px; /* Limit max size */
+    .pdf-container {
+      width: 100%; /* PDF container width */
+      height: 100%; /* PDF container height */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+      background-color: transparent; /* Make container background transparent */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .schedule-container img {
-      width: 100%; /* Responsive image */
-      height: auto;
-      display: block;
+    canvas {
+      display: block; /* Ensure the canvas is a block element */
+      margin: 0 auto; /* Center the canvas */
     }
   </style>
 </head>
 <body>
 
-  <div class="schedule-container">
-    <!-- PNG Image with Image Map -->
-    <img src="schedule.png" alt="Budapest Trip Schedule" usemap="#schedule-map">
-
-    <!-- Image Map -->
-    <map name="schedule-map">
-      <area shape="rect" coords="200,300,400,500" href="termal-spa.html" alt="Termas">
-      <area shape="rect" coords="450,550,650,750" href="zoo-cafe.html" alt="Zoo Café">
-      <area shape="rect" coords="700,600,900,800" href="ice-skate.html" alt="Ice Skating">
-      <area shape="rect" coords="1000,800,1200,1000" href="evening-cruise.html" alt="Evening Cruise">
-    </map>
+  <!-- PDF Container -->
+  <div class="pdf-container">
+    <canvas id="pdf-canvas"></canvas> <!-- PDF renders here -->
   </div>
+
+  <!-- Include PDF.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+
+  <!-- Script to Render the PDF -->
+    <script>
+    // URL of the PDF file
+    const pdfUrl = "schedule.pdf";
+
+    // References to the canvas and its context
+    const canvas = document.getElementById("pdf-canvas");
+    const context = canvas.getContext("2d");
+
+    let pdfInstance; // To store the loaded PDF instance
+    let currentPage = 1; // Default to the first page
+
+    // Function to calculate scale based on container size
+    function calculateScale(pageViewport) {
+      const container = document.querySelector('.pdf-container');
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+
+      // Scale based on width and height constraints
+      const widthScale = containerWidth / pageViewport.width;
+      const heightScale = containerHeight / pageViewport.height;
+
+      // Use the smaller scale to fit the PDF into the container
+      return Math.min(widthScale, heightScale);
+    }
+
+    // Function to render a page dynamically
+    function renderPage() {
+      pdfInstance.getPage(currentPage).then(page => {
+        // Original viewport at default scale
+        const viewport = page.getViewport({ scale: 1 });
+
+        // Calculate dynamic scale
+        const dynamicScale = calculateScale(viewport);
+
+        // Create a new viewport with the dynamic scale
+        const scaledViewport = page.getViewport({ scale: dynamicScale });
+
+        // Set canvas dimensions
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+
+        // Render the page onto the canvas
+        const renderContext = {
+          canvasContext: context,
+          viewport: scaledViewport
+        };
+        page.render(renderContext);
+      });
+    }
+
+    // Function to handle resizing
+    function resizePdf() {
+      if (pdfInstance) {
+        renderPage(); // Re-render the page with updated dimensions
+      }
+    }
+
+    // Load the PDF document
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+      pdfInstance = pdf; // Store the PDF instance
+      renderPage(); // Render the first page
+    }).catch(error => {
+      console.error("Error loading PDF:", error);
+    });
+
+    // Adjust the PDF rendering on window resize
+    window.addEventListener("resize", resizePdf);
+  </script>
 
 </body>
 </html>
