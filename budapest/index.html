@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Budapest Trip Schedule</title>
+  <title>High-Resolution PDF Viewer</title>
   <style>
     body {
       margin: 0;
@@ -18,10 +18,9 @@
     }
 
     .pdf-container {
-      width: 100%; /* PDF container width */
-      height: 100%; /* PDF container height */
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-      background-color: transparent; /* Make container background transparent */
+      width: 80%; /* Adjust container width */
+      height: 60%; /* Adjust container height */
+      background-color: transparent; /* Seamless background */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -29,7 +28,10 @@
 
     canvas {
       display: block; /* Ensure the canvas is a block element */
-      margin: 0 auto; /* Center the canvas */
+      width: 100%; /* Scale the canvas down to fit the container */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+
+      height: auto; /* Maintain aspect ratio */
     }
   </style>
 </head>
@@ -45,7 +47,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
 
   <!-- Script to Render the PDF -->
-    <script>
+  <script>
     // URL of the PDF file
     const pdfUrl = "schedule.pdf";
 
@@ -70,19 +72,20 @@
       return Math.min(widthScale, heightScale);
     }
 
-    // Function to render a page dynamically
+    // Function to render a page dynamically with high resolution
     function renderPage() {
       pdfInstance.getPage(currentPage).then(page => {
         // Original viewport at default scale
         const viewport = page.getViewport({ scale: 1 });
 
-        // Calculate dynamic scale
-        const dynamicScale = calculateScale(viewport);
+        // Calculate dynamic scale based on container size
+        const displayScale = calculateScale(viewport);
 
-        // Create a new viewport with the dynamic scale
-        const scaledViewport = page.getViewport({ scale: dynamicScale });
+        // Set a high resolution scale factor (2x or more for better clarity)
+        const resolutionScale = 5; // Increase to render higher resolution
+        const scaledViewport = page.getViewport({ scale: displayScale * resolutionScale });
 
-        // Set canvas dimensions
+        // Set canvas dimensions for high resolution rendering
         canvas.width = scaledViewport.width;
         canvas.height = scaledViewport.height;
 
@@ -92,6 +95,10 @@
           viewport: scaledViewport
         };
         page.render(renderContext);
+
+        // Use CSS to scale the canvas down to the display scale
+        canvas.style.width = `${viewport.width * displayScale}px`;
+        canvas.style.height = `${viewport.height * displayScale}px`;
       });
     }
 
