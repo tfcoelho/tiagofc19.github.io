@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Viewer with Dynamic Container</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #A8CFFF, #F5E3FF); /* Gradient background */
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .pdf-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    iframe {
+      border: none; /* Remove iframe border */
+    }
+  </style>
+</head>
+<body>
+  <div id="pdf-container" class="pdf-container">
+    <iframe id="pdf-iframe"></iframe>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+
+  <script>
+    const pdfUrl = "schedule.pdf"; // Path to your PDF
+    const container = document.getElementById("pdf-container");
+    const iframe = document.getElementById("pdf-iframe");
+
+    // Function to load the PDF and adjust container size
+    function loadPdfAndResizeContainer() {
+      // Load the PDF using PDF.js
+      pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+        pdf.getPage(1).then(page => {
+          const viewport = page.getViewport({ scale: 1 }); // Default scale
+          const pdfWidth = viewport.width;
+          const pdfHeight = viewport.height;
+
+          // Set the size of the container to match the PDF dimensions
+          container.style.width = `${pdfWidth}px`;
+          container.style.height = `${pdfHeight}px`;
+
+          // Load the PDF into the iframe
+          iframe.src = pdfUrl;
+          iframe.style.width = "100%";
+          iframe.style.height = "100%";
+        });
+      }).catch(error => {
+        console.error("Error loading PDF:", error);
+      });
+    }
+
+    // Load the PDF and resize the container on load
+    window.onload = loadPdfAndResizeContainer;
+  </script>
+</body>
+</html>
