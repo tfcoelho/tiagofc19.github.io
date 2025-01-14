@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High-Resolution PDF Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #A8CFFF, #F5E3FF); /* Seamless gradient background */
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevent scrolling */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full page height */
+    }
+
+    .pdf-container {
+      width: 80%; /* Adjust container width */
+      height: 60%; /* Adjust container height */
+      background-color: transparent; /* Seamless background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    canvas {
+      display: block; /* Ensure the canvas is a block element */
+      width: 100%; /* Scale the canvas down to fit the container */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+
+      height: auto; /* Maintain aspect ratio */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PDF Container -->
+  <div class="pdf-container">
+    <canvas id="pdf-canvas"></canvas> <!-- PDF renders here -->
+  </div>
+
+  <!-- Include PDF.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+
+  <!-- Script to Render the PDF -->
+  <script>
+    // URL of the PDF file
+    const pdfUrl = "schedule.pdf";
+
+    // References to the canvas and its context
+    const canvas = document.getElementById("pdf-canvas");
+    const context = canvas.getContext("2d");
+
+    let pdfInstance; // To store the loaded PDF instance
+    let currentPage = 1; // Default to the first page
+
+    // Function to calculate scale based on container size
+    function calculateScale(pageViewport) {
+      const container = document.querySelector('.pdf-container');
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+
+      // Scale based on width and height constraints
+      const widthScale = containerWidth / pageViewport.width;
+      const heightScale = containerHeight / pageViewport.height;
+
+      // Use the smaller scale to fit the PDF into the container
+      return Math.min(widthScale, heightScale);
+    }
+
+    // Function to render a page dynamically with high resolution
+    function renderPage() {
+      pdfInstance.getPage(currentPage).then(page => {
+        // Original viewport at default scale
+        const viewport = page.getViewport({ scale: 1 });
+
+        // Calculate dynamic scale based on container size
+        const displayScale = calculateScale(viewport);
+
+        // Set a high resolution scale factor (2x or more for better clarity)
+        const resolutionScale = 5; // Increase to render higher resolution
+        const scaledViewport = page.getViewport({ scale: displayScale * resolutionScale });
+
+        // Set canvas dimensions for high resolution rendering
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+
+        // Render the page onto the canvas
+        const renderContext = {
+          canvasContext: context,
+          viewport: scaledViewport
+        };
+        page.render(renderContext);
+
+        // Use CSS to scale the canvas down to the display scale
+        canvas.style.width = `${viewport.width * displayScale}px`;
+        canvas.style.height = `${viewport.height * displayScale}px`;
+      });
+    }
+
+    // Function to handle resizing
+    function resizePdf() {
+      if (pdfInstance) {
+        renderPage(); // Re-render the page with updated dimensions
+      }
+    }
+
+    // Load the PDF document
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+      pdfInstance = pdf; // Store the PDF instance
+      renderPage(); // Render the first page
+    }).catch(error => {
+      console.error("Error loading PDF:", error);
+    });
+
+    // Adjust the PDF rendering on window resize
+    window.addEventListener("resize", resizePdf);
+  </script>
+
+</body>
+</html>
