@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Széchenyi Thermal Baths</title>
+  <style>
+
+    @font-face {
+    font-family: 'LeagueGothic'; /* Name you'll use in your CSS */
+    src: url('../fonts/league-gothic.leaguegothic-regular.otf') format('opentype'); /* Path to the font */
+    font-weight: normal; /* Optional: Define font weight */
+    font-style: normal; /* Optional: Define font style */
+    }
+
+    @font-face {
+    font-family: 'Barbra'; /* Name you'll use in your CSS */
+    src: url('../fonts/Barbra-Regular.otf') format('opentype'); /* Path to the font */
+    font-weight: normal; /* Optional: Define font weight */
+    font-style: normal; /* Optional: Define font style */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'League Gothic', Arial, sans-serif; /* Match schedule's playful font style */
+      background: linear-gradient(to bottom, #A8CFFF, #F5E3FF); /* Seamless gradient background */
+      background-attachment: fixed; /* Fix the background to avoid repetition */
+      background-size: cover; /* Ensure it covers the full height */
+      color: #ff66c4;
+    }
+    .text-shadow {
+      font-family: 'LeagueGothic', Arial, sans-serif; /* Replace with your font */
+      color: #4004BD; /* Main text color (purple) */
+      text-shadow:
+      0.5px 0.5px 0 #FF66CC; /* Larger offset for depth */
+    }
+
+    .container {
+      max-width: 800px;
+      width: 90%;
+      margin: 50px auto;
+      padding: 20px;
+      background: #bcd9ff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      align-content: center;
+      position: relative; /* Needed for positioning clouds inside */
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Barbra', Serif;
+      text-transform: uppercase;
+      font-size: 6rem;
+      line-height: 8rem;
+      color: #4004bd;
+      font-weight: normal;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      position: relative;
+    }
+
+    p {
+      font-family: 'LeagueGothic', serif;
+      font-weight: lighter;
+      font-size: 2rem;
+      color: #4004bd;
+      margin: 10px 100px;
+      text-align: justify;
+      padding: 30px;
+      background: #fff; /* Pinkish box matching the schedule */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      position: relative;
+    }
+
+    .buttons {
+      margin: 20px 0;
+      z-index: 1;
+      position: relative;
+
+    }
+
+    .buttons a {
+      display: inline-block;
+      font-family: 'LeagueGothic';
+      text-decoration: none;
+      background: #f464bc;
+      color: #fff;
+      padding: 12px 25px;
+      font-size: 2rem;
+      font-weight: lighter;
+      margin: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .buttons a:hover {
+      background: #28027a;
+      transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    iframe {
+      width: 100%;
+      height: 450px;
+      border: 2px solid #A8CFFF;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      position: relative; /* Ensure it stays above the clouds */
+      z-index: 1;
+    }
+
+    .clouds {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none; /* Allow interaction with content below */
+    }
+
+    .cloud {
+      position: absolute;
+      opacity: 1; /* Semi-transparent clouds */
+    }
+
+    .cloud1 {
+      top: 5%;
+      left: 5%;
+      width: 200px;
+    }
+
+    .cloud2 {
+      top: 20%;
+      left: 50%;
+      width: 250px;
+    }
+
+    .cloud3 {
+      top: 0%;
+      left: 40%;
+      width: 220px;
+    }
+
+    .bee{
+      top: 30%;
+      left: 5%;
+      width: 70px;
+    }
+
+    .sun{
+      top: -10%;
+      left: 75%;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Clouds -->
+
+
+  <div class="container">
+    <h1>Széchenyi Thermal Baths</h1>
+    <p class="text-shadow">
+      The Széchenyi Thermal Baths are one of the largest and most famous thermal bath complexes in Europe,
+      located in the beautiful City Park of Budapest. Known for their healing waters and stunning architecture,
+      these baths are a must-visit for relaxation and rejuvenation.
+    </p>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <a href="https://www.szechenyibath.hu/" target="_blank">Visit Website</a>
+    </div>
+    <div class="clouds">
+      <img src="../graphics/cloud1.png" alt="Cloud" class="cloud cloud1">
+      <img src="../graphics/cloud2.png" alt="Cloud" class="cloud cloud2">
+      <img src="../graphics/cloud3.png" alt="Cloud" class="cloud cloud3">
+      <img src="../graphics/bee.png" alt="Cloud" class="cloud bee">
+      <img src="../graphics/sun.png" alt="Cloud" class="cloud sun">
+    </div>
+    <!-- Embedded Google Map -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2694.524192245766!2d19.0823791!3d47.518656799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741db8605675577%3A0xcbc0c308b68d2412!2sTermas%20de%20Sz%C3%A9chenyi!5e0!3m2!1spt-PT!2snl!4v1736802954776!5m2!1spt-PT!2snl" loading="lazy"></iframe>
+  </div>
+
+</body>
+</html>
