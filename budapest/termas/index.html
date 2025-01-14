@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Széchenyi Thermal Baths</title>
   <style>
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px; /* Adjust base font size for smaller screens */
+      }
+
+      .container {
+        max-width: 100%; /* Allow the container to take up full width */
+        padding: 10px; /* Reduce padding */
+      }
+
+      h1 {
+        font-size: 3.5rem !important;/* Scale down heading size */
+        line-height: 4rem !important; /* Adjust line height */
+      }
+
+      p {
+        min-width: unset !important;; /* Remove fixed minimum width */
+        max-width: 90% !important;
+        font-size: 1.2rem; /* Reduce font size */
+        padding: 15px; /* Adjust padding for smaller screens */
+      }
+
+      .buttons a {
+        font-size: 1rem; /* Adjust button font size */
+        padding: 10px 20px; /* Reduce padding for buttons */
+      }
+
+      iframe {
+        height: 300px; /* Reduce iframe height */
+      }
+    }
 
     @font-face {
     font-family: 'LeagueGothic'; /* Name you'll use in your CSS */
@@ -32,17 +63,14 @@
 
    .didyouknow {
     font-family: 'LeagueGothic', Arial, sans-serif;
-    width: 100%; /* Responsive width for mobile screens */
     color: #ffffff; /* Main text color (purple) */
     text-shadow: 2px 2px 0 #FF66CC; /* Drop shadow effect */
-    margin: auto; /* Center horizontally and vertically */
     padding: 20px 30px; /* Add padding for better spacing on mobile */
     background: #ffaee0; /* Box background color */
     text-align: center; /* Align text inside the box */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
     position: relative; /* Ensure proper positioning */
   }
-
 
     .container {
       max-width: 800px;
@@ -78,7 +106,7 @@
       font-size: 2rem;
       margin: auto; /* Center horizontally and reduce overall height */
       max-width: 50%;
-      min-width: 300px;
+      min-width: 200px;
       color: #4004bd;
       text-align: justify;
       padding: 30px;
@@ -165,7 +193,7 @@
     }
 
     .bee{
-      top: 20%;
+      top: 15%;
       left: 5%;
       width: 10%;
     }
