@@ -29,15 +29,25 @@
       background-size: cover; /* Ensure it covers the full height */
       color: #ff66c4;
     }
-    .text-shadow {
-      font-family: 'LeagueGothic', Arial, sans-serif; /* Replace with your font */
-      color: #4004BD; /* Main text color (purple) */
-      text-shadow:
-      0.5px 0.5px 0 #FF66CC; /* Larger offset for depth */
-    }
+
+   .didyouknow {
+    font-family: 'LeagueGothic', Arial, sans-serif;
+    width: 100%; /* Responsive width for mobile screens */
+    max-width: 300px; /* Limit width for larger screens */
+    color: #ffffff; /* Main text color (purple) */
+    text-shadow: 2px 2px 0 #FF66CC; /* Drop shadow effect */
+    margin: auto; /* Center horizontally and vertically */
+    padding: 20px 30px; /* Add padding for better spacing on mobile */
+    background: #ffaee0; /* Box background color */
+    text-align: center; /* Align text inside the box */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+    position: relative; /* Ensure proper positioning */
+  }
+
 
     .container {
       max-width: 800px;
+      max-height: 90%;
       width: 90%;
       margin: 50px auto;
       padding: 20px;
@@ -65,17 +75,24 @@
     p {
       font-family: 'LeagueGothic', serif;
       font-weight: lighter;
+      letter-spacing: 2px; /* Adjust the value as needed */
       font-size: 2rem;
+      min-width: 400px;
+      margin: auto; /* Center horizontally and reduce overall height */
+      max-width: 50%;
       color: #4004bd;
-      margin: 10px 100px;
       text-align: justify;
       padding: 30px;
+      line-height: 2.2rem;
       background: #fff; /* Pinkish box matching the schedule */
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       z-index: 1;
       position: relative;
     }
 
+    .highlight {
+      color: #FF66CC; /* Example: Pink color */
+    }
     .buttons {
       margin: 20px 0;
       z-index: 1;
@@ -87,6 +104,7 @@
       display: inline-block;
       font-family: 'LeagueGothic';
       text-decoration: none;
+      letter-spacing: 2px;
       background: #f464bc;
       color: #fff;
       padding: 12px 25px;
@@ -167,10 +185,11 @@
 
   <div class="container">
     <h1>Széchenyi Thermal Baths</h1>
-    <p class="text-shadow">
-      The Széchenyi Thermal Baths are one of the largest and most famous thermal bath complexes in Europe,
-      located in the beautiful City Park of Budapest. Known for their healing waters and stunning architecture,
-      these baths are a must-visit for relaxation and rejuvenation.
+    <p class="didyouknow">
+      DID YOU KNOW?
+    </p>
+    <p>
+      The <span class="highlight"> Széchenyi Thermal Baths</span> draw water from two thermal springs, reaching up to <span class="highlight">77°C</span> at the source! This makes it one of the <span class="highlight"> hottest thermal spring water sources in Europe </span>, and the mineral-rich waters are believed to have <span class="highlight">healing properties</span>.
     </p>
 
     <!-- Buttons -->
