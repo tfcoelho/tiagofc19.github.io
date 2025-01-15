@@ -16,7 +16,7 @@
   ],
   "start_url": "/budapest",
   "display": "standalone",
-  "background_color": "#bcd9ff",
-  "theme_color": "#ffffff",
+  "background_color": "#A8CFFF",
+  "theme_color": "#A8CFFF",
   "orientation": "portrait"
 }
