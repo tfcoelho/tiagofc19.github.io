@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install Budapest Schedule App</title>
+  <link rel="icon" href="graphics/bee.png">
+  <link rel="apple-touch-icon" href="graphics/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .install-button {
+      display: none;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .install-button:active {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Install the Budapest Schedule App</h1>
+  <p>Add our app to your device for quick access and a full web app experience!</p>
+
+  <!-- Button for PWA Installation -->
+  <button id="installButton" class="install-button">Install App</button>
+
+  <!-- Instructions for iOS Users -->
+  <div id="iosInstructions" style="display: none;">
+    <h3>iOS Users</h3>
+    <p>Tap <span style="font-weight: bold;">Share</span> (<img src="graphics/share-icon.png" alt="Share Icon" style="width: 20px; vertical-align: middle;">) and select <span style="font-weight: bold;">"Add to Home Screen"</span>.</p>
+  </div>
+
+  <script>
+    let deferredPrompt;
+
+    // Detect platform
+    const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isAndroid = /android/i.test(navigator.userAgent);
+
+    const installButton = document.getElementById("installButton");
+    const iosInstructions = document.getElementById("iosInstructions");
+
+    if (isIos) {
+      // Show iOS-specific instructions
+      iosInstructions.style.display = "block";
+    } else {
+      // Add event listener for Android
+      window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        installButton.style.display = "block";
+
+        installButton.addEventListener("click", () => {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+              console.log("App installed");
+            } else {
+              console.log("App installation dismissed");
+            }
+            deferredPrompt = null;
+          });
+        });
+      });
+    }
+  </script>
+</body>
+</html>
