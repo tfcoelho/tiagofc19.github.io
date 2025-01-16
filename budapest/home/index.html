@@ -11,17 +11,21 @@
 <body>
   <div class="container">
     <a href="/budapest" style="text-decoration: none;">
-    <h1>Home Sweet Home</h1>
+      <h1>Home Sweet Home</h1>
     </a>
     <p class="didyouknow">DID YOU KNOW?</p>
     <p>
-      Your home at <span class="highlight">Dob utca 63</span> is in Budapest's lively <span class="highlight">7th district</span>, known for its rich history and vibrant culture.
-      Just a short walk away is the <span class="highlight">Dohány Street Synagogue</span>, the largest in Europe, and a centerpiece of the historic <span class="highlight">Jewish Quarter</span>. This area is famous for its unique mix of <span class="highlight">ruin bars</span>, cobblestone streets, and layered history.
-      <br><br>
-      Fun fact: Dob Street was once a hub for <span class="highlight">craftspeople</span>, and it’s said one shopkeeper used a louder bell to lure customers away from a rival bakery!
+      Your home at <span class="highlight">Dob utca 61</span> is in Budapest's lively <span class="highlight">7th district</span>, known for its rich history and vibrant culture.
+      Just a short walk away is the <span class="highlight">Dohány Street Synagogue</span>, the largest in Europe, and a centerpiece of the historic <span class="highlight">Jewish Quarter</span>.
     </p>
     <div class="buttons">
       <a href="https://www.airbnb.co.uk/rooms/15981878?c=.pi80.pkYm9va2luZy92Ml9taWdyYXRpb24vcmVzZXJ2YXRpb25fZ3Vlc3RfY29uZmlybWF0aW9u&euid=8addc9bd-79aa-f4de-40f1-39fd37b2cf4b&source_impression_id=p3_1736720238_P3DA-0mE5QaUs23s" target="_blank">Check the Airbnb</a>
+      <button onclick="showWifiQR()">Connect to Wi-Fi</button>
+      <button onclick="requestPassword()">Get Secret Instructions</button>
+    </div>
+    <div id="wifiQR" style="display:none;">
+      <p>Scan the QR code below to connect to Wi-Fi:</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=WIFI:S:UPCD4C5DF3;T:WPA;P:8wkMy2eVdwda;;" alt="Wi-Fi QR Code">
     </div>
     <div class="clouds">
       <img src="../graphics/cloud1.png" alt="Cloud" class="cloud cloud1">
@@ -30,7 +34,33 @@
       <img src="../graphics/bee.png" alt="Bee" class="cloud bee">
       <img src="../graphics/sun.png" alt="Sun" class="cloud sun">
     </div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2688.648136357822!2d19.06552517613711!3d47.5029733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc48454e8f47%3A0x356735b6184b7baf!2sDob%20u.%2063%2C%201074%20Budapest%2C%20Hungary!5e0!3m2!1sen!2shu!4v1736864815354!5m2!1sen!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2298.2148974618863!2d19.06509781583402!3d47.501105069652766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741dc68b3bd6407%3A0x1653bcd62d881db8!2sBudapest%2C%20Dob%20u.%2061%2C%201074%20Hungria!5e0!3m2!1spt-PT!2snl!4v1737038021195!5m2!1spt-PT!2snl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
+
+  <script>
+    function showWifiQR() {
+      document.getElementById("wifiQR").style.display = "block";
+    }
+
+    function requestPassword() {
+      const userPassword = prompt("Enter the password to access secret instructions:");
+      const correctPassword = "vdf";
+      if (userPassword === correctPassword) {
+        alert(
+          "Secret Instructions:\n\n" +
+          "Address: Dob utca 61. Budapest, 1074.\n" +
+          "Use this code on the door phone to open: 11 key symbol 6083.\n" +
+          "Enter, go a few steps forward, you will see the elevator on the right side.\n" +
+          "Go up to the 1st floor. When you get out from the elevator, turn right.\n" +
+          "Go all over the round corridor to the other side, till you get behind the elevator.\n" +
+          "Here you will see a white plastic door in the corner, with a post box on the side of the door.\n" +
+          "On the side of the door you will see a black key safe, use this code to open: 8998.\n" +
+          "Take the key from the safe, enter, your apartment here is the LEFT door (Missouri)."
+        );
+      } else {
+        alert("Incorrect password. Access denied.");
+      }
+    }
+  </script>
 </body>
 </html>

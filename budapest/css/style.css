@@ -111,6 +111,24 @@ p {
   position: relative;
 }
 
+button {
+  font-family: 'LeagueGothic';
+  text-decoration: none;
+  letter-spacing: 2px;
+  background: #f464bc;
+  color: #fff;
+  padding: 12px 25px;
+  font-size: 2rem;
+  font-weight: lighter;
+  margin: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover{
+  background: #28027a;
+  transform: scale(1.05);
+}
 .buttons a {
   display: inline-block;
   font-family: 'LeagueGothic';
