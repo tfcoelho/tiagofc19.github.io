@@ -1,0 +1,21 @@
+#map {
+    height: 100vh; /* Full page height */
+    width: 100%;   /* Full page width */
+    background: linear-gradient(to bottom, #b3c5d1, #a4bdcf 70%, #829aba 100%); /* Blue gradient */
+    position: relative; /* Allow positioning for pseudo-element */
+    overflow: hidden; /* Ensure no overflow outside the container */
+}
+
+/* Add noise effect */
+#map:before {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAIAAAUAAWgmWQ0AAAAASUVORK5CYII='); /* Noise texture */
+    opacity: 0.1; /* Adjust opacity to control noise visibility */
+    z-index: 1; /* Ensure it's above the gradient */
+    pointer-events: none; /* Allow interactions with map elements */
+}
