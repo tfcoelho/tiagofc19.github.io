@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Ensures proper mobile rendering and touch zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="../main.css">
     <title>Tiago's Portfolio</title>
     <link rel="icon" href="../Images/ass.webp">
@@ -14,103 +17,176 @@
             padding-top: 5%;
             height: 100px;
         }
-
         .header-item {
-            flex: 1; /* Ensures that each header item takes equal space */
+            flex: 1; /* Ensures each header item takes equal space */
             text-align: center;
+        }
+        body {
+            background-color: #1F1F1F;
+            margin: 0;
+            padding: 0;
+        }
+        .footer {
+            text-align: center;
+            color: #8a8788;
         }
     </style>
 </head>
 
-<body bgcolor="#1F1F1F">
+<body>
 <header class="header-container">
     <div class="header-item">
-        <a href="mailto:info@tfcoelho.com">CONTACT</a>
+        <a href="mailto:info@tfcoelho.com" style="color: white; text-decoration: none;">CONTACT</a>
     </div>
     <div class="header-item">
-        <a href=".."><img src="../Images/Signature.png" alt="Signature" class="center"></a>
+        <a href="..">
+            <img src="../Images/Signature.png" alt="Signature" class="center">
+        </a>
     </div>
     <div class="header-item">
-        <a href="https://www.instagram.com/_tiagocoelho_/"><img src="../Images/insta.png" alt="Instagram" style="width: 20px;"></a>
+        <a href="https://www.instagram.com/_tiagocoelho_/">
+            <img src="../Images/insta.png" alt="Instagram" style="width: 20px;">
+        </a>
     </div>
 </header>
 
-<div style="text-align: center; padding-top: 30px " >
-    <p STYLE="font-size: 35px; color: #FFFFFF; font-weight: 100; line-height: 0.5">MATTE</p>
-    <p STYLE="color: #8a8788; font-size: 20px;line-height: 1"> THE BEAUTY OF DIFFUSE REFLECTION </p>
+<div style="text-align: center; padding-top: 30px;">
+    <p style="font-size: 35px; color: #FFFFFF; font-weight: 100; line-height: 0.5">MATTE</p>
+    <p style="color: #8a8788; font-size: 20px; line-height: 1;">
+        THE BEAUTY OF DIFFUSE REFLECTION
+    </p>
 </div>
-<table style="padding-top: 50px; border-collapse: collapse" cellspacing="0" cellpadding="0" border="0">
+
+<!-- 1st Table -->
+<table style="padding-top: 50px; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:26.40%">
-                <img class = "myImages" id="myImg" src="../Images/fendi.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/fendi.webp"
+                 data-fullsrc="../Images/fendi.webp"
+                 style="width: 100%">
         </th>
         <th style="width:23.40%">
-                <img class = "myImages" id="myImg" src="../Images/tunel.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/tunel.webp"
+                 data-fullsrc="../Images/tunel.webp"
+                 style="width: 100%">
         </th>
         <th style="width:49.8%;" rowspan="2">
-                <img class = "myImages" id="myImg" src="../Images/maserati.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/maserati.webp"
+                 data-fullsrc="../Images/maserati.webp"
+                 style="width: 100%">
         </th>
     </tr>
     <tr>
         <th style="width:50%;" colspan="2">
-                <img class = "myImages" id="myImg" src="../Images/eiffel.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/eiffel.webp"
+                 data-fullsrc="../Images/eiffel.webp"
+                 style="width: 100%">
         </th>
     </tr>
-
 </table>
 
-<table style="padding-top: 150px;padding-bottom: 100px; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
+<!-- 2nd Table -->
+<table style="padding-top: 150px; padding-bottom: 100px; border-collapse: collapse;"
+       cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:20%">
-                <img class = "myImages" id="myImg" src="../Images/berlin1.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/berlin1.webp"
+                 data-fullsrc="../Images/berlin1.webp"
+                 style="width: 100%">
         </th>
         <th style="width:20%">
-                <img class = "myImages" id="myImg" src="../Images/lisbon1.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/lisbon1.webp"
+                 data-fullsrc="../Images/lisbon1.webp"
+                 style="width: 100%">
         </th>
         <th style="width:20%">
-                <img class = "myImages" id="myImg" src="../Images/vans.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/vans.webp"
+                 data-fullsrc="../Images/vans.webp"
+                 style="width: 100%">
         </th>
         <th style="width:20%">
-                <img class = "myImages" id="myImg" src="../Images/lisbon2.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/lisbon2.webp"
+                 data-fullsrc="../Images/lisbon2.webp"
+                 style="width: 100%">
         </th>
         <th style="width:20%">
-                <img class = "myImages" id="myImg" src="../Images/berlin2.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/berlin2.webp"
+                 data-fullsrc="../Images/berlin2.webp"
+                 style="width: 100%">
         </th>
     </tr>
 </table>
 
-<table style="padding-top: 10px;padding-bottom: 100px; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
+<!-- 3rd Table -->
+<table style="padding-top: 10px; padding-bottom: 100px; border-collapse: collapse;"
+       cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:7.8%">
-                <img class = "myImages" id="myImg" src="../Images/rome1.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/rome1.webp"
+                 data-fullsrc="../Images/rome1.webp"
+                 style="width: 100%">
         </th>
         <th style="width:18%">
-                <img class = "myImages" id="myImg" src="../Images/rome2.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/rome2.webp"
+                 data-fullsrc="../Images/rome2.webp"
+                 style="width: 100%">
         </th>
         <th style="width:8%">
-                <img class = "myImages" id="myImg" src="../Images/rome3.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/rome3.webp"
+                 data-fullsrc="../Images/rome3.webp"
+                 style="width: 100%">
         </th>
         <th style="width:17%">
-                <img class = "myImages" id="myImg" src="../Images/rome4.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/rome4.webp"
+                 data-fullsrc="../Images/rome4.webp"
+                 style="width: 100%">
         </th>
         <th style="width:43.5%" rowspan="3">
-                <img class = "myImages" id="myImg" src="../Images/rome11.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/rome11.webp"
+                 data-fullsrc="../Images/rome11.webp"
+                 style="width: 100%">
         </th>
     </tr>
     <tr>
         <td class="nest" colspan="4">
             <table style="width: 100%" cellspacing="0" cellpadding="0" border="0">
                 <th style="width:11.1%">
-                        <img class = "myImages" id="myImg" src="../Images/rome5.webp" style="width: 100%">
+                    <img loading="lazy" class="myImages"
+                         src="../mid_images/rome5.webp"
+                         data-fullsrc="../Images/rome5.webp"
+                         style="width: 100%">
                 </th>
                 <th style="width:24.9%">
-                        <img class = "myImages" id="myImg" src="../Images/rome6.webp" style="width: 100%">
+                    <img loading="lazy" class="myImages"
+                         src="../mid_images/rome6.webp"
+                         data-fullsrc="../Images/rome6.webp"
+                         style="width: 100%">
                 </th>
                 <th style="width:11.1%">
-                        <img class = "myImages" id="myImg" src="../Images/rome7.webp" style="width: 100%">
+                    <img loading="lazy" class="myImages"
+                         src="../mid_images/rome7.webp"
+                         data-fullsrc="../Images/rome7.webp"
+                         style="width: 100%">
                 </th>
                 <th style="width:11.1%">
-                        <img class = "myImages" id="myImg" src="../Images/rome3.webp" style="width: 100%">
+                    <img loading="lazy" class="myImages"
+                         src="../mid_images/rome3.webp"
+                         data-fullsrc="../Images/rome3.webp"
+                         style="width: 100%">
                 </th>
             </table>
         </td>
@@ -119,10 +195,16 @@
         <td class="nest" colspan="4">
             <table style="width: 100%" cellspacing="0" cellpadding="0" border="0">
                 <th style="width:25%" colspan="2">
-                        <img class = "myImages" id="myImg" src="../Images/rome9.webp" style="width: 100%">
+                    <img loading="lazy" class="myImages"
+                         src="../mid_images/rome9.webp"
+                         data-fullsrc="../Images/rome9.webp"
+                         style="width: 100%">
                 </th>
                 <th style="width:25%" colspan="2">
-                        <img class = "myImages" id="myImg" src="../Images/rome10.webp" style="width: 100%">
+                    <img loading="lazy" class="myImages"
+                         src="../mid_images/rome10.webp"
+                         data-fullsrc="../Images/rome10.webp"
+                         style="width: 100%">
                 </th>
             </table>
         </td>
@@ -133,170 +215,243 @@
     <p style="color: #8a8788">LISBON, 2020</p>
 </div>
 
-<table style="padding-top: 10px;padding-bottom: 100px; border-collapse: collapse; width: 55%" cellspacing="0" cellpadding="0" border="0">
+<!-- 4th Table -->
+<table style="padding-top: 10px; padding-bottom: 100px; border-collapse: collapse; width: 55%"
+       cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:100%" colspan="3">
-                <img class = "myImages" id="myImg" src="../Images/lx1.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/lx1.webp"
+                 data-fullsrc="../Images/lx1.webp"
+                 style="width: 100%">
         </th>
     </tr>
     <tr>
         <th style="width:33.332%">
-                <img class = "myImages" id="myImg" src="../Images/lx2.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/lx2.webp"
+                 data-fullsrc="../Images/lx2.webp"
+                 style="width: 100%">
         </th>
         <th style="width:33.332%">
-                <img class = "myImages" id="myImg" src="../Images/lx3.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/lx3.webp"
+                 data-fullsrc="../Images/lx3.webp"
+                 style="width: 100%">
         </th>
         <th style="width:33.332%">
-                <img class = "myImages" id="myImg" src="../Images/lx4.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/lx4.webp"
+                 data-fullsrc="../Images/lx4.webp"
+                 style="width: 100%">
         </th>
     </tr>
 </table>
 
 <div class="center3">
-    <img class = "myImages" id="myImg" src="../Images/ps.webp" style="width: 100%">
+    <img loading="lazy" class="myImages"
+         src="../mid_images/ps.webp"
+         data-fullsrc="../Images/ps.webp"
+         style="width: 100%">
 </div>
 
 <div style="text-align: center;">
     <p style="color: #8a8788; font-size: 15px">PHOTOSHOP COMPETITION, 2020</p>
 </div>
 
-<table style="padding-top: 100px;padding-bottom: 100px; border-collapse: collapse;" cellspacing="0" cellpadding="15" border="0">
+<!-- 5th Table -->
+<table style="padding-top: 100px; padding-bottom: 100px; border-collapse: collapse;"
+       cellspacing="0" cellpadding="15" border="0">
     <tr>
-        <th style="width:17%"><img class = "myImages" id="myImg" src="../Images/gym1.webp" style="width: 100%"></th>
-        <th style="width:17%"><img class = "myImages" id="myImg" src="../Images/gym2.webp" style="width: 100%"></th>
-        <th style="width:17%"><img class = "myImages" id="myImg" src="../Images/gym3.webp" style="width: 100%"></th>
-        <th style="width:17%"><img class = "myImages" id="myImg" src="../Images/gym4.webp" style="width: 100%"></th>
+        <th style="width:17%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/gym1.webp"
+                 data-fullsrc="../Images/gym1.webp"
+                 style="width: 100%">
+        </th>
+        <th style="width:17%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/gym2.webp"
+                 data-fullsrc="../Images/gym2.webp"
+                 style="width: 100%">
+        </th>
+        <th style="width:17%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/gym3.webp"
+                 data-fullsrc="../Images/gym3.webp"
+                 style="width: 100%">
+        </th>
+        <th style="width:17%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/gym4.webp"
+                 data-fullsrc="../Images/gym4.webp"
+                 style="width: 100%">
+        </th>
     </tr>
 </table>
 
-
+<!-- 6th Table -->
 <table style="padding-top: 50px; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:25%">
-                <img class = "myImages" id="myImg" src="../Images/ava1.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/ava1.webp"
+                 data-fullsrc="../Images/ava1.webp"
+                 style="width: 100%">
         </th>
         <th style="width:25%">
-                <img class = "myImages" id="myImg" src="../Images/ava3.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/ava3.webp"
+                 data-fullsrc="../Images/ava3.webp"
+                 style="width: 100%">
         </th>
         <th style="width:42%" rowspan="2">
-                <img class = "myImages" id="myImg" src="../Images/ava5.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/ava5.webp"
+                 data-fullsrc="../Images/ava5.webp"
+                 style="width: 100%">
         </th>
     </tr>
     <tr>
         <th style="width:25%">
-                <img class = "myImages" id="myImg" src="../Images/ava4.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/ava4.webp"
+                 data-fullsrc="../Images/ava4.webp"
+                 style="width: 100%">
         </th>
         <th style="width:25%">
-                <img class = "myImages" id="myImg" src="../Images/ava2.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/ava2.webp"
+                 data-fullsrc="../Images/ava2.webp"
+                 style="width: 100%">
         </th>
     </tr>
 </table>
 
-
-<table style="padding-top: 100px;width: 60%; border-collapse: collapse;" cellspacing="0" cellpadding="0" border="0">
+<!-- 7th Table -->
+<table style="padding-top: 100px; width: 60%; border-collapse: collapse;"
+       cellspacing="0" cellpadding="0" border="0">
     <tr>
         <th style="width:32.2%">
-                <img class = "myImages" id="myImg" src="../Images/buda.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/buda.webp"
+                 data-fullsrc="../Images/buda.webp"
+                 style="width: 100%">
         </th>
-        <th style="width: 5px"/>
+        <th style="width: 5px"></th>
         <th style="width:28.6%">
-                <img class = "myImages" id="myImg" src="../Images/ams.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/ams.webp"
+                 data-fullsrc="../Images/ams.webp"
+                 style="width: 100%">
         </th>
-        <th style="width: 5px"/>
+        <th style="width: 5px"></th>
         <th style="width:34.2%">
-            <img class = "myImages" id="myImg" src="../Images/antwerp.webp" style="width: 100%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/antwerp.webp"
+                 data-fullsrc="../Images/antwerp.webp"
+                 style="width: 100%">
         </th>
     </tr>
 </table>
-<div style="padding-top: 8px"/>
-<table cellpadding="0" border="0" style="width: 60%; padding-bottom: 100px" >
-    <th style="width:36%">
-            <img class = "myImages" id="myImg" src="../Images/chinatown.webp" style="width: 100%">
-    </th>
-    <th style="width: 2px"/>
-    <th style="width:30.2%">
-            <img class = "myImages" id="myImg" src="../Images/lxbuild.webp" style="width: 100%">
-    </th>
-    <th style="width: 2px"/>
-    <th style="width:30.2%">
-            <img class = "myImages" id="myImg" src="../Images/groni.webp" style="width: 100%">
-    </th>
+<div style="padding-top: 8px"></div>
+<table cellpadding="0" border="0" style="width: 60%; padding-bottom: 100px;">
+    <tr>
+        <th style="width:36%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/chinatown.webp"
+                 data-fullsrc="../Images/chinatown.webp"
+                 style="width: 100%">
+        </th>
+        <th style="width: 2px"></th>
+        <th style="width:30.2%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/lxbuild.webp"
+                 data-fullsrc="../Images/lxbuild.webp"
+                 style="width: 100%">
+        </th>
+        <th style="width: 2px"></th>
+        <th style="width:30.2%">
+            <img loading="lazy" class="myImages"
+                 src="../mid_images/groni.webp"
+                 data-fullsrc="../Images/groni.webp"
+                 style="width: 100%">
+        </th>
+    </tr>
 </table>
 
-
-
-
-<div id="myModal" class="modal">
-
+<!-- Modal -->
+<div id="myModal" class="modal" style="display:none;">
     <!-- The Close Button -->
-    <span class="close">&times;</span>
+    <span class="close" style="cursor:pointer; position:absolute; top:20px; right:40px; font-size:40px; font-weight:bold; color:white;">&times;</span>
 
     <!-- Modal Content (The Image) -->
-    <img class="modal-content" id="img01">
+    <img class="modal-content" id="img01" style="vertical-align: center; display: block; max-width:90%; margin:0 auto;">
 
     <!-- Modal Caption (Image Text) -->
-    <div id="caption"></div>
+    <div id="caption" style="text-align:center; color:#ccc; padding:10px;"></div>
 </div>
 
-<div class = footer style="padding-bottom: 5%">
-    <p> 2024 © All rights reserved | Tiago Coelho</p>
+<div class="footer" style="padding-bottom: 5%;">
+    <p>2025 © All rights reserved | Tiago Coelho</p>
 </div>
-
 
 <script>
-    // create references to the modal...
+    // References to the modal
     var modal = document.getElementById('myModal');
-    // to all images -- note I'm using a class!
+    // All images with the class 'myImages'
     var images = document.getElementsByClassName('myImages');
-    // the image in the modal
+    // The image in the modal
     var modalImg = document.getElementById("img01");
-    // and the caption in the modal
+    // The caption in the modal
     var captionText = document.getElementById("caption");
+    // The close button
+    var span = document.getElementsByClassName("close")[0];
 
+    // Adjust image padding when the modal image loads
     modalImg.onload = function() {
         var imageheight = modalImg.height;
         var imagewidth = modalImg.width;
         var viewportHeight = window.innerHeight;
         var viewportWidth = window.innerWidth;
+        var modalContent = document.querySelector(".modal-content");
 
         if ((imageheight / imagewidth) > (viewportHeight / viewportWidth)) {
-            paddingTop = 0.075 * viewportHeight;
-            var modalContent = document.querySelector(".modal-content");
+            // Tall image
+            var paddingTop = 0.075 * viewportHeight;
+            modalContent.style.paddingTop = paddingTop + "px";
+        } else {
+            // Wide image
+            var width = viewportWidth * 0.85;
+            var height = (width * imageheight) / imagewidth;
+            var paddingTop = viewportHeight * (1 - height / viewportHeight) / 2;
             modalContent.style.paddingTop = paddingTop + "px";
         }
-        else{
-            width = viewportWidth * 0.85;
-            height = width * imageheight / imagewidth;
-            paddingTop = viewportHeight * (1-height/viewportHeight)/2;
-            var modalContent = document.querySelector(".modal-content");
-            modalContent.style.paddingTop = paddingTop + "px";
-        }
-    }
-    // Go through all of the images with our custom class
+    };
+
+    // Attach click listeners
     for (var i = 0; i < images.length; i++) {
-        var img = images[i];
-        // and attach our click listener for this image.
-        img.onclick = function(evt) {
+        images[i].onclick = function(evt) {
             modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-        }
+            // Load full-res from data-fullsrc
+            modalImg.src = this.getAttribute("data-fullsrc") || this.src;
+            captionText.innerHTML = this.alt || "";
+        };
     }
 
-    var span = document.getElementsByClassName("close")[0];
-
+    // Close button
     span.onclick = function() {
         modal.style.display = "none";
-    }
+    };
 
-
+    // Close modal on ESC
     document.onkeydown = function(evt) {
         evt = evt || window.event;
         if (evt.keyCode == 27) {
             modal.style.display = "none";
         }
     };
-
 </script>
+
 </body>
 </html>
