@@ -21,52 +21,7 @@
       flex: 1; /* Ensures that each header item takes equal space */
       text-align: center;
     }
-    /* Modal styling */
-     /* MODAL STYLES */
-    #myModal {
-      /* Start hidden */
-      display: none;
-      /* Use fixed positioning + top/left 0 to fill screen */
-      position: fixed;
-      top: 0;
-      left: 0;
-      /* Make sure it covers the entire viewport */
-      width: 100vw;
-      height: 100vh;
 
-      /* Above other elements */
-      z-index: 999;
-
-      /* Dark, semi-transparent background */
-      background-color: rgba(0,0,0,0.7);
-
-      /* Flexbox to center items horizontally & vertically */
-      display: flex;         /* turned on by JS, see below */
-      flex-direction: column;/* stack image & caption vertically */
-      justify-content: center;
-      align-items: center;
-    }
-
-    .close {
-      cursor: pointer;
-      position: absolute;
-      top: 15px;
-      right: 35px;
-      font-size: 40px;
-      font-weight: bold;
-      color: white;
-    }
-    .close:hover {
-      color: #ccc;
-    }
-
-    /* The image inside the modal */
-    .modal-content {
-      max-width: 80vw;
-      max-height: 90vh;
-      object-fit: contain;
-      display: block;
-    }
   </style>
 </head>
 <body bgcolor="#1F1F1F">
@@ -467,38 +422,69 @@
   <p>2025 © All rights reserved | Tiago Coelho</p>
 </div>
 
-<!-- MODAL -->
-<div id="myModal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="img01">
+<!-- Modal Structure -->
+<div id="myModal" class="modal" style="display:none;">
+  <!-- The Close Button -->
+  <span class="close" style="cursor:pointer; position:absolute; top:20px; right:40px; font-size:40px; font-weight:bold; color:white;">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01" align="center" style="vertical-align: center; display: block; max-width: 90%; margin: 0 auto;">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption" style="text-align:center; color:#ccc; padding:10px;"></div>
 </div>
 
 <script>
+  // References to the modal
   var modal = document.getElementById('myModal');
+  // To all images with the class 'myImages'
   var images = document.getElementsByClassName('myImages');
-  var modalImg = document.getElementById('img01');
-  var captionText = document.getElementById('caption');
-  var span = document.getElementsByClassName('close')[0];
+  // The image inside the modal
+  var modalImg = document.getElementById("img01");
+  // The caption inside the modal
+  var captionText = document.getElementById("caption");
+  // The close button
+  var span = document.getElementsByClassName("close")[0];
 
-  // On image click: open modal + show full image
+  // Centering logic after image load
+  modalImg.onload = function () {
+    var imageheight = modalImg.height;
+    var imagewidth = modalImg.width;
+    var viewportHeight = window.innerHeight;
+    var viewportWidth = window.innerWidth;
+
+    if ((imageheight / imagewidth) > (viewportHeight / viewportWidth)) {
+      // Tall image
+      var paddingTop = 0.075 * viewportHeight;
+      var modalContent = document.querySelector(".modal-content");
+      modalContent.style.paddingTop = paddingTop + "px";
+    } else {
+      // Wide image
+      var width = viewportWidth * 0.85;
+      var height = (width * imageheight) / imagewidth;
+      var paddingTop = viewportHeight * (1 - height / viewportHeight) / 2;
+      var modalContent = document.querySelector(".modal-content");
+      modalContent.style.paddingTop = paddingTop + "px";
+    }
+  };
+
+  // Attach onclick listeners
   for (var i = 0; i < images.length; i++) {
-    images[i].onclick = function() {
-      // Show the flex container
-      modal.style.display = "flex";
-      // Load the high-res from data-fullsrc
-      modalImg.src = this.getAttribute("data-fullsrc") || this.src;
-      // Set caption if alt is present
+    images[i].onclick = function(evt) {
+      modal.style.display = "block";
+      // Load the full-res image from data-fullsrc
+      modalImg.src = this.getAttribute('data-fullsrc') || this.src;
       captionText.innerHTML = this.alt || "";
     };
   }
 
-  // Close modal on 'x'
-  span.onclick = function() {
+  // Close button
+  span.onclick = function () {
     modal.style.display = "none";
   };
 
-  // Close on ESC
-  document.onkeydown = function(evt) {
+  // Close on Esc key
+  document.onkeydown = function (evt) {
     evt = evt || window.event;
     if (evt.keyCode == 27) {
       modal.style.display = "none";
