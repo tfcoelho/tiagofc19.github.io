@@ -93,6 +93,8 @@ function runSequence(colEl) {
   const signature    = document.getElementById('signature');
   const themeToggle  = document.getElementById('theme-toggle');
   const musicIsland  = document.getElementById('music-island');
+  const copyright    = document.getElementById('copyright');
+  const aboutBtn     = document.getElementById('about-btn');
 
   themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('light');
@@ -170,11 +172,17 @@ function runSequence(colEl) {
   Promise.all(promises).then(() => {
     setTimeout(() => {
       portfolio.classList.add('settled');
+      if (window.innerWidth <= 768) {
+        portfolio.style.height = '45vh';
+        portfolio.style.width  = '100%';
+      }
       // wait for the portfolio shrink transition (0.9s) to finish before showing signature
       setTimeout(() => {
         signature.classList.add('visible');
         themeToggle.classList.add('visible');
         if (musicIsland) musicIsland.classList.add('visible');
+        if (copyright)   copyright.classList.add('visible');
+        if (aboutBtn)    aboutBtn.classList.add('visible');
       }, 950);
     }, SETTLE_DELAY_MS);
   });

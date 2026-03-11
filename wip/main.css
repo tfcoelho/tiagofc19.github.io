@@ -58,30 +58,19 @@ body.light #signature svg {
 /* ── Theme toggle ───────────────────────────────────────── */
 #theme-toggle {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  top: 3.7rem;
+  left: 2rem;
   z-index: 10;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 1.5px solid rgba(255,255,255,0.18);
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  transition:
-    opacity      0.6s ease,
-    background   0.5s ease,
-    border-color 0.5s ease,
-    box-shadow   0.5s ease,
-    transform    0.2s ease;
-}
-
-#theme-toggle:hover {
-  transform: scale(1.12);
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.5));
+  transition: opacity 0.8s ease, filter 0.5s ease;
 }
 
 #theme-toggle.visible {
@@ -91,30 +80,86 @@ body.light #signature svg {
 #theme-toggle svg {
   width: 14px;
   height: 14px;
-  fill: rgba(255,255,255,0.75);
+  fill: #ffffff;
   transition: fill 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #theme-toggle:hover svg {
-  fill: #fff;
+  fill: rgba(255,255,255,0.65);
 }
 
-/* Light mode: gradient orb with grain */
 body.light #theme-toggle {
-  background:
-    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.25'/></svg>"),
-    linear-gradient(135deg, #f9dfc8 0%, #d6e4f7 50%, #e8d4f5 100%);
-  border: none;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.55));
 }
 
 body.light #theme-toggle svg {
-  fill: rgba(0,0,0,0.45);
+  fill: #507280;
   transform: rotate(45deg);
 }
 
 body.light #theme-toggle:hover svg {
-  fill: rgba(0,0,0,0.7);
+  fill: #3d5a68;
+}
+
+/* ── About button ───────────────────────────────────────── */
+#about-btn {
+  position: fixed;
+  top: 3.7rem;
+  right: 2rem;
+  z-index: 10;
+  color: #ffffff;
+  font-size: 0.6rem;
+  font-weight: 1000;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.5));
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.8s ease, transform 0.8s ease, color 0.5s ease, filter 0.5s ease;
+}
+
+#about-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#about-btn:hover {
+  color: rgba(255,255,255,0.65);
+}
+
+body.light #about-btn {
+  color: #507280;
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.55));
+}
+
+body.light #about-btn:hover {
+  color: #3d5a68;
+}
+
+/* ── Copyright ──────────────────────────────────────────── */
+#copyright {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 10;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.8s ease, transform 0.8s ease, color 0.5s ease;
+}
+
+#copyright.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.light #copyright {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* ── Portfolio wrapper ─────────────────────────────────── */
@@ -140,6 +185,14 @@ body {
   width: 70rem;
   height: 65vh;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.65);
+}
+
+@media (max-width: 768px) {
+  #portfolio.settled {
+    width: 100% !important;
+    height: 50vh !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* ── Individual column ─────────────────────────────────── */
