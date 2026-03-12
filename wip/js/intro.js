@@ -1,3 +1,15 @@
+// Pointer cursors — skipped on macOS (Chromium has a known cursor-area bug there)
+if (navigator.userAgentData?.platform !== 'macOS' && !/Mac/.test(navigator.userAgent)) {
+  const s = document.createElement('style');
+  s.textContent = `
+    a, a *, button, button *,
+    .col, .col *, #portfolio, #portfolio *,
+    #music-island, #music-island *,
+    #about-btn, #back-btn, #theme-toggle { cursor: pointer; }
+  `;
+  document.head.appendChild(s);
+}
+
 /**
  * Column intro animation
  *
@@ -36,7 +48,7 @@ async function loadStrips(slug, indices) {
     indices.map(n => loadImage(`columns/${slug}/strip_${n}.webp`))
   );
   return results
-    .map((img, i) => {
+    .map((img) => {
       if (!img) return null;
       img.alt = '';
       img.draggable = false;
@@ -96,8 +108,12 @@ function runSequence(colEl) {
   const copyright    = document.getElementById('copyright');
   const aboutBtn     = document.getElementById('about-btn');
 
+  // Restore saved theme
+  if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
+
   themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('light');
+    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
   });
 
   // Discover strips for all columns in parallel, then build DOM
@@ -183,6 +199,9 @@ function runSequence(colEl) {
         if (musicIsland) musicIsland.classList.add('visible');
         if (copyright)   copyright.classList.add('visible');
         if (aboutBtn)    aboutBtn.classList.add('visible');
+
+        // enable hover 1s after intro completes
+        setTimeout(() => portfolio.classList.add('hover-ready'), 500);
       }, 950);
     }, SETTLE_DELAY_MS);
   });

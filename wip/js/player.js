@@ -40,6 +40,19 @@ const TRACKS = [
 
   let current = 0;
 
+  // ── Persist playback state across page navigations ─────────────────────
+  const STATE_KEY = 'musicState';
+
+  function saveState() {
+    sessionStorage.setItem(STATE_KEY, JSON.stringify({
+      idx:     current,
+      time:    audio.currentTime,
+      playing: !audio.paused,
+    }));
+  }
+
+  window.addEventListener('pagehide', saveState);
+
   function fmt(s) {
     if (!s || isNaN(s)) return '0:00';
     const m = Math.floor(s / 60);
@@ -136,6 +149,16 @@ const TRACKS = [
     play();
   });
 
-  // Load first track on init
-  loadTrack(0);
+  // ── Load track, restoring state if coming from another page ───────────
+  const saved = JSON.parse(sessionStorage.getItem(STATE_KEY) || 'null');
+  if (saved && saved.idx < TRACKS.length) {
+    current = saved.idx;
+    loadTrack(current);
+    audio.addEventListener('canplay', () => {
+      audio.currentTime = saved.time || 0;
+      if (saved.playing) play();
+    }, { once: true });
+  } else {
+    loadTrack(0);
+  }
 })();
