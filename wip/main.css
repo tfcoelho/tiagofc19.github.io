@@ -215,6 +215,9 @@ body {
     height: 50vh !important;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   }
+  #copyright {
+    display: none;
+  }
 }
 
 /* ── Individual column ─────────────────────────────────── */
