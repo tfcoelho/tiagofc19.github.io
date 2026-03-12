@@ -8,10 +8,14 @@
  *   { title: 'Song Name', artist: 'Artist', src: 'music/song.mp3', cover: 'music/cover.jpg' }
  */
 
+// Pages in subfolders (e.g. /music/) can set window.MUSIC_BASE = '../'
+// before loading this script to fix relative paths.
+const _base = (typeof window !== 'undefined' && window.MUSIC_BASE) ? window.MUSIC_BASE : '';
+
 const TRACKS = [
   // { title: 'Song Name', artist: 'Artist', src: 'music/song.mp3', cover: 'music/cover.jpg' },
-  { title: 'On My Knees', artist: 'RÜFÜS DU SOL', src: 'music/Rufus Du Sol - On My Knees.mp3', cover: 'music/surrender_cover.jpg' },
-  { title: 'Inhale', artist: 'RÜFÜS DU SOL', src: 'music/RUFUS DU SOL - Inhale.mp3', cover: 'music/inhale_cover.jpg' },
+  { title: 'On My Knees', artist: 'RÜFÜS DU SOL', src: _base + 'music/Rufus Du Sol - On My Knees.mp3', cover: _base + 'music/surrender_cover.jpg' },
+  { title: 'Inhale',      artist: 'RÜFÜS DU SOL', src: _base + 'music/RUFUS DU SOL - Inhale.mp3',       cover: _base + 'music/inhale_cover.jpg' },
 ];
 
 // ── Init ───────────────────────────────────────────────────────────────────

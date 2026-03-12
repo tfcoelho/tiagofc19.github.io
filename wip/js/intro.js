@@ -24,7 +24,7 @@ const COLUMNS = [
   { slug: 'car',        title: 'Car',        strips: [1, 2, 3] },
   { slug: 'nature',     title: 'Nature',     strips: [1, 2, 3] },
   { slug: 'dirtbikes',  title: 'Dirt Bikes', strips: [1, 2, 3] },
-  { slug: 'music',      title: 'Music',      strips: [1, 2, 3] },
+  { slug: 'music',      title: 'Music',      strips: [1, 2, 3], href: 'music/' },
   { slug: 'skateboard', title: 'Skateboard', strips: [1, 2, 3] },
   { slug: 'trips',      title: 'Trips',      strips: [1, 2, 3] },
 ];
@@ -155,7 +155,7 @@ function runSequence(colEl) {
     el.appendChild(label);
 
     el.addEventListener('click', () => {
-      window.location.href = `projects/${col.slug}.html`;
+      window.location.href = col.href || `projects/${col.slug}.html`;
     });
 
     portfolio.appendChild(el);
