@@ -155,7 +155,7 @@ function runSequence(colEl) {
     el.appendChild(label);
 
     el.addEventListener('click', () => {
-      window.location.href = col.href || `projects/${col.slug}.html`;
+      window.navigateTo(col.href || `projects/${col.slug}.html`);
     });
 
     portfolio.appendChild(el);

@@ -158,10 +158,21 @@ const TRACKS = [
   if (saved && saved.idx < TRACKS.length) {
     current = saved.idx;
     loadTrack(current);
-    audio.addEventListener('canplay', () => {
-      audio.currentTime = saved.time || 0;
-      if (saved.playing) play();
-    }, { once: true });
+    audio.currentTime = saved.time || 0;
+    if (saved.playing) {
+      // Start silent, begin playing immediately but fade volume in later
+      // (timed to start as the page loader finishes its exit)
+      audio.volume = 0;
+      play();
+      setTimeout(() => {
+        let step = 0;
+        const id = setInterval(() => {
+          step++;
+          audio.volume = Math.min(1, step / 20);
+          if (step >= 20) clearInterval(id);
+        }, 20);
+      }, 1000);
+    }
   } else {
     loadTrack(0);
   }
