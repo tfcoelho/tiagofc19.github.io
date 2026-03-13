@@ -25,7 +25,7 @@ import tempfile
 from pathlib import Path
 
 # ── Edit this to point at your collection folder ──────────
-FOLDER = "cars"  # relative to this script, or absolute path
+FOLDER = "trips"  # relative to this script, or absolute path
 # ──────────────────────────────────────────────────────────
 
 SUPPORTED = {'.jpg', '.jpeg', '.png', '.webp', '.heic', '.heif', '.tiff', '.tif'}

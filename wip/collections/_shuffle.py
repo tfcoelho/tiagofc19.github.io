@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 # ── Edit this to point at your collection folder ──────────
-FOLDER = "cars"  # relative to this script, or absolute path
+FOLDER = "trips"  # relative to this script, or absolute path
 # ──────────────────────────────────────────────────────────
 
 folder = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(FOLDER)
