@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 # ── Edit this to point at your collection folder ──────────
-FOLDER = "skateboard"  # relative to this script, or absolute path
+FOLDER = "dirt bikes"  # relative to this script, or absolute path
 # ──────────────────────────────────────────────────────────
 
 SUPPORTED = {'.jpg', '.jpeg', '.png', '.webp', '.heic', '.heif', '.tiff', '.tif'}
