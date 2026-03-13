@@ -24,8 +24,8 @@ const COLUMNS = [
   { slug: 'car',        title: 'Car',        strips: [1, 2, 3] },
   { slug: 'nature',     title: 'Nature',     strips: [1, 2, 3] },
   { slug: 'dirtbikes',  title: 'Dirt Bikes', strips: [1, 2, 3] },
-  { slug: 'music',      title: 'Music',      strips: [1, 2, 3], href: 'music/' },
-  { slug: 'skateboard', title: 'Skateboard', strips: [1, 2, 3] },
+  { slug: 'music',      title: 'Music',      strips: [1, 2, 3], href: 'collections/music/' },
+  { slug: 'skateboard', title: 'Skateboard', strips: [1, 2, 3], href: 'collections/skateboard/' },
   { slug: 'trips',      title: 'Trips',      strips: [1, 2, 3] },
 ];
 
