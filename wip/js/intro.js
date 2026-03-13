@@ -21,9 +21,9 @@ if (navigator.userAgentData?.platform !== 'macOS' && !/Mac/.test(navigator.userA
  */
 
 const COLUMNS = [
-  { slug: 'car',        title: 'Car',        strips: [1, 2, 3], href: 'collections/car/' },
+  { slug: 'cars',        title: 'Cars',        strips: [1, 2, 3], href: 'collections/cars/' },
   { slug: 'nature',     title: 'Nature',     strips: [1, 2, 3], href: 'collections/nature/' },
-  { slug: 'dirtbikes',  title: 'Dirt Bikes', strips: [1, 2, 3], href: 'collections/dirtbikes/' },
+  { slug: 'dirtbikes',  title: 'DirtBikes', strips: [1, 2, 3], href: 'collections/dirtbikes/' },
   { slug: 'music',      title: 'Music',      strips: [1, 2, 3], href: 'collections/music/' },
   { slug: 'skateboard', title: 'Skateboard', strips: [1, 2, 3], href: 'collections/skateboard/' },
   { slug: 'trips',      title: 'Trips',      strips: [1, 2, 3], href: 'collections/trips/' },
