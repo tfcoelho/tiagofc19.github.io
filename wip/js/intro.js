@@ -21,12 +21,12 @@ if (navigator.userAgentData?.platform !== 'macOS' && !/Mac/.test(navigator.userA
  */
 
 const COLUMNS = [
-  { slug: 'car',        title: 'Car',        strips: [1, 2, 3] },
-  { slug: 'nature',     title: 'Nature',     strips: [1, 2, 3] },
-  { slug: 'dirtbikes',  title: 'Dirt Bikes', strips: [1, 2, 3] },
+  { slug: 'car',        title: 'Car',        strips: [1, 2, 3], href: 'collections/car/' },
+  { slug: 'nature',     title: 'Nature',     strips: [1, 2, 3], href: 'collections/nature/' },
+  { slug: 'dirtbikes',  title: 'Dirt Bikes', strips: [1, 2, 3], href: 'collections/dirt bikes/' },
   { slug: 'music',      title: 'Music',      strips: [1, 2, 3], href: 'collections/music/' },
   { slug: 'skateboard', title: 'Skateboard', strips: [1, 2, 3], href: 'collections/skateboard/' },
-  { slug: 'trips',      title: 'Trips',      strips: [1, 2, 3] },
+  { slug: 'trips',      title: 'Trips',      strips: [1, 2, 3], href: 'collections/trips/' },
 ];
 
 const STRIP_DURATION_MS = 500;  // how long each strip is shown
