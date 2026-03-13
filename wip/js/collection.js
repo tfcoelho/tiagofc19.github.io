@@ -53,6 +53,22 @@
       margin-top: 0.9rem;
     }
 
+    /* Blur placeholder */
+    .gallery__item-blur {
+      position: absolute;
+      inset: -8%;
+      background-size: cover;
+      background-position: center;
+      filter: blur(12px);
+      transform: scale(1);
+      transition: opacity 0.4s ease;
+    }
+    .gallery__item img.loaded ~ .gallery__item-blur,
+    .gallery__item-blur.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     /* Photo scroll-in animation */
     .gallery__item img {
       transform: translateY(22px);
@@ -177,7 +193,7 @@
   }, { rootMargin: '500px 0px' });
 
   // ── Add one photo to the shortest column ──────────────────
-  function addPhoto(src, w, h, index) {
+  function addPhoto(src, w, h, index, blur) {
     let shortest = 0;
     for (let i = 1; i < 3; i++) {
       if (colHeights[i] < colHeights[shortest]) shortest = i;
@@ -196,6 +212,17 @@
     img.alt = '';
     img.addEventListener('click', () => openLightbox(index));
 
+    // Blur placeholder — sits behind the image, fades out once loaded
+    if (blur) {
+      const blurEl = document.createElement('div');
+      blurEl.className = 'gallery__item-blur';
+      blurEl.style.backgroundImage = `url(${blur})`;
+      img.addEventListener('load', () => {
+        blurEl.classList.add('hidden');
+      }, { once: true });
+      inner.appendChild(blurEl);
+    }
+
     inner.appendChild(img);
     item.appendChild(inner);
     colEls[shortest].appendChild(item);
@@ -212,7 +239,7 @@
       manifest.forEach((entry, i) => {
         const src = `${colBase}${entry.file}`;
         photos.push(src);
-        addPhoto(src, entry.w, entry.h, i);
+        addPhoto(src, entry.w, entry.h, i, entry.blur || '');
       });
       hideLoader();
     })
