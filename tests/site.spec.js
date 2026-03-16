@@ -111,11 +111,10 @@ test.describe('Mobile layout', () => {
     await expect(label).toBeVisible();
   });
 
-  test('collection switcher opens on mobile', async ({ page }) => {
+  test('collection switcher is visible on mobile', async ({ page }) => {
     await page.goto('/wip/collections/music/');
     await page.waitForSelector('#page-loader', { state: 'hidden', timeout: 8000 });
-    await page.locator('#collection-title').click();
-    await expect(page.locator('#switcher-menu.open')).toBeVisible({ timeout: 2000 });
+    await expect(page.locator('#switcher-menu')).toBeVisible({ timeout: 2000 });
   });
 
   test('about page photo covers full viewport on mobile', async ({ page }) => {

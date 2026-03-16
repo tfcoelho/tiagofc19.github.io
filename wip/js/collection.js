@@ -91,15 +91,12 @@
       flex-direction: column;
       align-items: flex-end;
     }
-    #collection-title {
-      position: static !important;
-    }
+    #collection-title { display: none !important; }
     #switcher-menu {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       gap: 0.55rem;
-      margin-top: 0.65rem;
     }
     #switcher-menu a {
       color: rgba(255,255,255,0.18);
@@ -111,33 +108,10 @@
       transition: color 0.2s;
     }
     #switcher-menu a:hover { color: rgba(255,255,255,0.65); }
+    #switcher-menu a.current { color: rgba(255,255,255,0.7); pointer-events: none; }
 
     @media (max-width: 600px) {
       #back-btn { font-weight: 400 !important; color: rgba(255,255,255,0.6) !important; letter-spacing: 0.3em !important; }
-      #collection-title { cursor: pointer; pointer-events: auto; font-size: 0; }
-      #collection-title::before { content: 'more'; font-size: 0.55rem; font-weight: 400; color: rgba(255,255,255,0.6); letter-spacing: 0.3em; text-transform: uppercase; }
-      #collection-title::after { content: ' ›'; font-size: 1.2rem; font-weight: 400; color: rgba(255,255,255,0.6); vertical-align: -0.12em; }
-      #collection-title.open::after { content: ' ‹'; }
-      #switcher-menu a.current { color: rgba(255,255,255,0.9); pointer-events: none; }
-      #switcher-menu {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 50;
-        background: rgba(10,10,10,0.96);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 0;
-      }
-      #switcher-menu.open { display: flex; }
-      #switcher-menu a {
-        font-size: 0.72rem;
-        letter-spacing: 0.4em;
-        color: rgba(255,255,255,0.55);
-      }
-      #switcher-menu a:hover { color: #fff; }
     }
 
     /* ── Theme toggle: show on collection pages ─────────────── */
@@ -150,7 +124,6 @@
     body.light { background: transparent !important; }
     body.light #back-btn { color: rgba(0,0,0,0.5) !important; }
     body.light #back-btn:hover { color: rgba(0,0,0,0.8) !important; }
-    body.light #collection-title { color: rgba(0,0,0,0.3); }
     body.light #switcher-menu a { color: rgba(0,0,0,0.22); }
     body.light #switcher-menu a:hover { color: rgba(0,0,0,0.65); }
     body.light #switcher-menu a.current { color: rgba(0,0,0,0.75); }
@@ -159,15 +132,6 @@
     body.light #loader-sig { fill: rgba(0,0,0,0.55) !important; }
     body.light #loader-name { color: rgba(0,0,0,0.35); }
     body.light #loader-line { background: rgba(0,0,0,0.1); }
-    @media (max-width: 600px) {
-      body.light #collection-title::before { color: rgba(0,0,0,0.5) !important; }
-      body.light #collection-title::after  { color: rgba(0,0,0,0.5) !important; }
-      body.light #back-btn { color: rgba(0,0,0,0.5) !important; }
-      body.light #switcher-menu { background: rgba(244,239,232,0.97); }
-      body.light #switcher-menu a { color: rgba(0,0,0,0.35); }
-      body.light #switcher-menu a:hover { color: rgba(0,0,0,0.75); }
-      body.light #switcher-menu a.current { color: rgba(0,0,0,0.8); }
-    }
   `;
   document.head.appendChild(style);
 
@@ -280,30 +244,14 @@
     switcherMenu.appendChild(a);
   });
 
+  const wrapper = document.createElement('div');
+  wrapper.id = 'collection-switcher';
   if (titleEl) {
-    // Wrap title + menu in a shared fixed container so they align
-    const wrapper = document.createElement('div');
-    wrapper.id = 'collection-switcher';
     titleEl.parentNode.insertBefore(wrapper, titleEl);
-    wrapper.appendChild(titleEl);
-    wrapper.appendChild(switcherMenu);
-
-    // Mobile: tap title to toggle overlay
-    titleEl.addEventListener('click', () => {
-      if (window.innerWidth <= 600) {
-        titleEl.classList.toggle('open');
-        switcherMenu.classList.toggle('open');
-      }
-    });
-
-    // Close overlay when tapping the backdrop (not a link)
-    switcherMenu.addEventListener('click', e => {
-      if (e.target === switcherMenu) {
-        titleEl.classList.remove('open');
-        switcherMenu.classList.remove('open');
-      }
-    });
+  } else {
+    document.body.appendChild(wrapper);
   }
+  wrapper.appendChild(switcherMenu);
 
   // ── Theme toggle ──────────────────────────────────────────
   const themeToggle = document.getElementById('theme-toggle');
