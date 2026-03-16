@@ -9,6 +9,9 @@
 
   const displayName = colName ? colName.replace(/[-_]/g, ' ') : '';
 
+  // ── Restore saved theme early so loader renders correctly ─
+  if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
+
   // ── Inject shared styles ──────────────────────────────────
   const style = document.createElement('style');
   style.textContent = `
@@ -135,6 +138,35 @@
         color: rgba(255,255,255,0.55);
       }
       #switcher-menu a:hover { color: #fff; }
+    }
+
+    /* ── Theme toggle: show on collection pages ─────────────── */
+    #theme-toggle {
+      display: flex !important;
+      opacity: 1;
+    }
+
+    /* ── Light mode overrides for collection pages ─────────── */
+    body.light { background: transparent !important; }
+    body.light #back-btn { color: rgba(0,0,0,0.5) !important; }
+    body.light #back-btn:hover { color: rgba(0,0,0,0.8) !important; }
+    body.light #collection-title { color: rgba(0,0,0,0.3); }
+    body.light #switcher-menu a { color: rgba(0,0,0,0.22); }
+    body.light #switcher-menu a:hover { color: rgba(0,0,0,0.65); }
+    body.light #switcher-menu a.current { color: rgba(0,0,0,0.75); }
+    body.light .gallery__item { background: rgba(0,0,0,0.04); }
+    body.light #page-loader { background: #f4efe8; }
+    body.light #loader-sig { fill: rgba(0,0,0,0.55) !important; }
+    body.light #loader-name { color: rgba(0,0,0,0.35); }
+    body.light #loader-line { background: rgba(0,0,0,0.1); }
+    @media (max-width: 600px) {
+      body.light #collection-title::before { color: rgba(0,0,0,0.5) !important; }
+      body.light #collection-title::after  { color: rgba(0,0,0,0.5) !important; }
+      body.light #back-btn { color: rgba(0,0,0,0.5) !important; }
+      body.light #switcher-menu { background: rgba(244,239,232,0.97); }
+      body.light #switcher-menu a { color: rgba(0,0,0,0.35); }
+      body.light #switcher-menu a:hover { color: rgba(0,0,0,0.75); }
+      body.light #switcher-menu a.current { color: rgba(0,0,0,0.8); }
     }
   `;
   document.head.appendChild(style);
@@ -270,6 +302,15 @@
         titleEl.classList.remove('open');
         switcherMenu.classList.remove('open');
       }
+    });
+  }
+
+  // ── Theme toggle ──────────────────────────────────────────
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     });
   }
 

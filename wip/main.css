@@ -80,19 +80,20 @@ body.light #signature svg {
 /* ── Theme toggle ───────────────────────────────────────── */
 #theme-toggle {
   position: fixed;
-  top: 3.7rem;
-  left: 2rem;
+  bottom: 2rem;
+  right: 2rem;
   z-index: 10;
-  background: none;
+  background: #2e2e2e;
   border: none;
-  padding: 0;
+  border-radius: 40px;
+  padding: 13px;
   cursor: pointer;
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.5));
-  transition: opacity 0.8s ease, filter 0.5s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.8s ease, background 0.5s ease, box-shadow 0.5s ease;
 }
 
 #theme-toggle.visible {
@@ -100,27 +101,31 @@ body.light #signature svg {
 }
 
 #theme-toggle svg {
-  width: 20px;
-  height: 20px;
-  fill: #ffffff;
+  width: 15px;
+  height: 15px;
+  fill: rgba(255, 255, 255, 0.8);
+  stroke: none;
   transition: fill 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #theme-toggle:hover svg {
-  fill: rgba(255,255,255,0.65);
+  fill: #ffffff;
 }
 
 body.light #theme-toggle {
-  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.55));
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 body.light #theme-toggle svg {
-  fill: #507280;
+  fill: rgba(0, 0, 0, 0.6);
   transform: rotate(45deg);
 }
 
 body.light #theme-toggle:hover svg {
-  fill: #3d5a68;
+  fill: rgba(0, 0, 0, 0.85);
 }
 
 /* ── About button ───────────────────────────────────────── */
