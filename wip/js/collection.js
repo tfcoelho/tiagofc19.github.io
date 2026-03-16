@@ -110,9 +110,12 @@
     #switcher-menu a:hover { color: rgba(255,255,255,0.65); }
 
     @media (max-width: 600px) {
-      #collection-title { cursor: pointer; }
-      #collection-title::after { content: ' ›'; opacity: 0.5; }
+      #back-btn { font-weight: 400 !important; color: rgba(255,255,255,0.6) !important; letter-spacing: 0.3em !important; }
+      #collection-title { cursor: pointer; pointer-events: auto; font-size: 0; }
+      #collection-title::before { content: 'more'; font-size: 0.55rem; font-weight: 400; color: rgba(255,255,255,0.6); letter-spacing: 0.3em; text-transform: uppercase; }
+      #collection-title::after { content: ' ›'; font-size: 1.2rem; font-weight: 400; color: rgba(255,255,255,0.6); vertical-align: -0.12em; }
       #collection-title.open::after { content: ' ‹'; }
+      #switcher-menu a.current { color: rgba(255,255,255,0.9); pointer-events: none; }
       #switcher-menu {
         display: none;
         position: fixed;
@@ -237,10 +240,11 @@
   const switcherMenu = document.createElement('div');
   switcherMenu.id = 'switcher-menu';
 
-  ALL_COLLECTIONS.filter(c => c.name !== colName).forEach(c => {
+  ALL_COLLECTIONS.forEach(c => {
     const a = document.createElement('a');
     a.href = `../${c.name}/`;
     a.textContent = c.label;
+    if (c.name === colName) a.classList.add('current');
     switcherMenu.appendChild(a);
   });
 
