@@ -77,6 +77,62 @@
     .gallery__item img.loaded {
       transform: translateY(0);
     }
+
+    /* Collection switcher */
+    #collection-switcher {
+      position: fixed;
+      top: 3.55rem;
+      right: 2rem;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    #collection-title {
+      position: static !important;
+    }
+    #switcher-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.55rem;
+      margin-top: 0.65rem;
+    }
+    #switcher-menu a {
+      color: rgba(255,255,255,0.18);
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    #switcher-menu a:hover { color: rgba(255,255,255,0.65); }
+
+    @media (max-width: 600px) {
+      #collection-title { cursor: pointer; }
+      #collection-title::after { content: ' ›'; opacity: 0.5; }
+      #collection-title.open::after { content: ' ‹'; }
+      #switcher-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(10,10,10,0.96);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 0;
+      }
+      #switcher-menu.open { display: flex; }
+      #switcher-menu a {
+        font-size: 0.72rem;
+        letter-spacing: 0.4em;
+        color: rgba(255,255,255,0.55);
+      }
+      #switcher-menu a:hover { color: #fff; }
+    }
   `;
   document.head.appendChild(style);
 
@@ -167,6 +223,51 @@
 
   if (titleEl) titleEl.textContent = displayName;
   document.title = displayName + ' — Tiago Coelho';
+
+  // ── Collection switcher ───────────────────────────────────
+  const ALL_COLLECTIONS = [
+    { name: 'cars',       label: 'Cars' },
+    { name: 'nature',     label: 'Nature' },
+    { name: 'dirtbikes',  label: 'Dirt Bikes' },
+    { name: 'music',      label: 'Music' },
+    { name: 'skateboard', label: 'Skateboard' },
+    { name: 'trips',      label: 'Trips' },
+  ];
+
+  const switcherMenu = document.createElement('div');
+  switcherMenu.id = 'switcher-menu';
+
+  ALL_COLLECTIONS.filter(c => c.name !== colName).forEach(c => {
+    const a = document.createElement('a');
+    a.href = `../${c.name}/`;
+    a.textContent = c.label;
+    switcherMenu.appendChild(a);
+  });
+
+  if (titleEl) {
+    // Wrap title + menu in a shared fixed container so they align
+    const wrapper = document.createElement('div');
+    wrapper.id = 'collection-switcher';
+    titleEl.parentNode.insertBefore(wrapper, titleEl);
+    wrapper.appendChild(titleEl);
+    wrapper.appendChild(switcherMenu);
+
+    // Mobile: tap title to toggle overlay
+    titleEl.addEventListener('click', () => {
+      if (window.innerWidth <= 600) {
+        titleEl.classList.toggle('open');
+        switcherMenu.classList.toggle('open');
+      }
+    });
+
+    // Close overlay when tapping the backdrop (not a link)
+    switcherMenu.addEventListener('click', e => {
+      if (e.target === switcherMenu) {
+        titleEl.classList.remove('open');
+        switcherMenu.classList.remove('open');
+      }
+    });
+  }
 
   // ── Column references and running height accumulators ─────
   const colEls     = [
