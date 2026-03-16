@@ -152,9 +152,9 @@
     #back-btn {
       position: fixed;
       top: 3.7rem;
-      right: 2rem;
+      left: 2rem;
       z-index: 10;
-      color: rgba(255,255,255,0.6);
+      color: rgba(0,0,0,0.5);
       font-size: 0.6rem;
       font-weight: 1000;
       letter-spacing: 0.1em;
@@ -164,24 +164,83 @@
       animation: fadeUp 0.6s ease both 1.2s;
       transition: color 0.2s ease;
     }
-    #back-btn:hover { color: #fff; }
+    #back-btn:hover { color: rgba(0,0,0,0.85); }
+
+    /* ── Page title ───────────────────────────────────────── */
+    #page-title {
+      position: fixed;
+      top: 3.55rem;
+      right: 2rem;
+      z-index: 10;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      pointer-events: none;
+      animation: fadeUp 0.6s ease both 1.2s;
+    }
 
     /* ── Mobile ──────────────────────────────────────────── */
     @media (max-width: 768px) {
       .about {
-        flex-direction: column;
-      }
-
-      .about__photo {
         position: relative;
-        width: 100%;
-        height: 50vh;
+        flex-direction: column;
+        min-height: 100vh;
       }
 
+      /* Photo fills the whole section as a background */
+      .about__photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Show the top (dark) portion of the portrait */
+      .about__photo img {
+        object-position: top center;
+        transform: scale(1.1);
+        transform-origin: top center;
+      }
+
+      /* Subtle top gradient for text readability */
+      .about__photo::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.75) 0%,
+          rgba(255,255,255,0.20) 40%,
+          rgba(255,255,255,0) 65%
+        );
+        pointer-events: none;
+      }
+
+      /* Content floats above the photo */
       .about__content {
-        padding: 3.5rem 2rem 8rem 2rem;
+        position: relative;
+        z-index: 1;
+        padding: 0rem 2rem 8rem 2rem;
+        margin-top: -6rem;
         max-width: 100%;
       }
+
+      /* Dark signature, back button and page title */
+      #signature svg { fill: rgba(0,0,0,0.75); }
+      #back-btn { color: rgba(0,0,0,0.6); }
+      #back-btn:hover { color: rgba(0,0,0,0.9); }
+      #page-title { color: rgba(0,0,0,0.35); }
+
+      /* Dark text over the light upper part of the photo */
+      .about__label,
+      .about__bio { color: rgba(0,0,0,0.9); font-weight: 300;}
+      .about__name { color: rgba(0,0,0,0.85); }
+      .about__divider { background: rgba(0,0,0,0.18); }
+      .about__link-label { color: rgba(0,0,0,0.90); font-weight: 300;}
+      .about__link-value { color: rgba(0,0,0,0.6); font-weight: 300;}
+      .about__link:hover .about__link-value { color: rgba(0,0,0,0.9); }
     }
   </style>
 </head>
@@ -204,6 +263,9 @@
   <!-- ── Back button ───────────────────────────────────────── -->
   <a id="back-btn" href="index.html">Back</a>
 
+  <!-- ── Page title ────────────────────────────────────────── -->
+  <div id="page-title">About</div>
+
   <!-- ── Theme toggle ────────────────────────────────────── -->
   <button id="theme-toggle" class="visible" aria-label="Toggle light mode">
     <svg viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -220,7 +282,6 @@
 
     <div class="about__content">
 
-      <p class="about__label">About</p>
       <h1 class="about__name">Tiago Coelho</h1>
 
       <p class="about__bio">
