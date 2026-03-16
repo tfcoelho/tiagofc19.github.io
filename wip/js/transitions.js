@@ -59,4 +59,17 @@
 
   // Expose for programmatic navigation (e.g. column clicks in intro.js)
   window.navigateTo = navigateTo;
+
+  // Safari bfcache: when user hits browser back, the DOM is restored with
+  // the overlay still opaque. Detect this and instantly clear it.
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      overlay.style.transition = 'none';
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      requestAnimationFrame(() => {
+        overlay.style.transition = 'opacity 0.3s ease';
+      });
+    }
+  });
 })();
