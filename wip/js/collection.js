@@ -110,8 +110,70 @@
     #switcher-menu a:hover { color: rgba(255,255,255,0.65); }
     #switcher-menu a.current { color: rgba(255,255,255,0.7); pointer-events: none; }
 
-    @media (max-width: 600px) {
-      #back-btn { font-weight: 400 !important; color: rgba(255,255,255,0.6) !important; letter-spacing: 0.3em !important; }
+    /* More button (mobile only) */
+    #more-btn {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: inherit;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.5));
+      transition: color 0.2s ease;
+    }
+    #more-btn:hover { color: #fff; }
+
+    /* Full-screen collection overlay */
+    #switcher-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(10,10,10,0.96);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8rem;
+    }
+    #switcher-overlay.open { display: flex; }
+    #switcher-overlay a {
+      color: rgba(255,255,255,0.3);
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    #switcher-overlay a.current { color: rgba(255,255,255,0.85); pointer-events: none; }
+    #switcher-overlay a:not(.current):hover { color: rgba(255,255,255,0.65); }
+    #overlay-close {
+      position: absolute;
+      top: 3.55rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+    #overlay-close:hover { color: rgba(255,255,255,0.8); }
+
+    @media (max-width: 768px) {
+      #back-btn, #more-btn { font-weight: 400 !important; color: rgba(255,255,255,0.6) !important; letter-spacing: 0.3em !important; }
+      #switcher-menu { display: none; }
+      #more-btn { display: block; }
     }
 
     /* ── Theme toggle: show on collection pages ─────────────── */
@@ -127,6 +189,11 @@
     body.light #switcher-menu a { color: rgba(0,0,0,0.22); }
     body.light #switcher-menu a:hover { color: rgba(0,0,0,0.65); }
     body.light #switcher-menu a.current { color: rgba(0,0,0,0.75); }
+    body.light #more-btn { color: rgba(0,0,0,0.5); }
+    body.light #switcher-overlay { background: rgba(244,239,232,0.97); }
+    body.light #switcher-overlay a { color: rgba(0,0,0,0.3); }
+    body.light #switcher-overlay a.current { color: rgba(0,0,0,0.8); }
+    body.light #overlay-close { color: rgba(0,0,0,0.35); }
     body.light .gallery__item { background: rgba(0,0,0,0.04); }
     body.light #page-loader { background: #f4efe8; }
     body.light #loader-sig { fill: rgba(0,0,0,0.55) !important; }
@@ -244,6 +311,32 @@
     switcherMenu.appendChild(a);
   });
 
+  // Mobile "more" button
+  const moreBtn = document.createElement('button');
+  moreBtn.id = 'more-btn';
+  moreBtn.textContent = 'more ›';
+
+  // Full-screen overlay (mobile)
+  const overlay = document.createElement('div');
+  overlay.id = 'switcher-overlay';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.id = 'overlay-close';
+  closeBtn.textContent = 'close ×';
+  overlay.appendChild(closeBtn);
+
+  ALL_COLLECTIONS.forEach(c => {
+    const a = document.createElement('a');
+    a.href = `../${c.name}/`;
+    a.textContent = c.label;
+    if (c.name === colName) a.classList.add('current');
+    overlay.appendChild(a);
+  });
+  document.body.appendChild(overlay);
+
+  moreBtn.addEventListener('click', () => overlay.classList.add('open'));
+  closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+
   const wrapper = document.createElement('div');
   wrapper.id = 'collection-switcher';
   if (titleEl) {
@@ -252,6 +345,7 @@
     document.body.appendChild(wrapper);
   }
   wrapper.appendChild(switcherMenu);
+  wrapper.appendChild(moreBtn);
 
   // ── Theme toggle ──────────────────────────────────────────
   const themeToggle = document.getElementById('theme-toggle');
