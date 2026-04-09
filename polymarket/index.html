@@ -220,6 +220,56 @@
       padding-bottom: 6px;
     }
 
+    /* ── EASTER EGG: TEAM INTEL ── */
+    #teamIntel {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 340px;
+      background: #0d1117;
+      border: 1px solid #c084fc;
+      border-radius: 16px;
+      padding: 20px;
+      z-index: 9999;
+      box-shadow: 0 0 40px rgba(192,132,252,0.25);
+      animation: intelSlide 0.3s ease;
+    }
+    @keyframes intelSlide {
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    #teamIntel h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #c084fc;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+    #teamIntel h4 button {
+      background: none; border: none; color: var(--muted2);
+      cursor: pointer; font-size: 16px; padding: 0;
+    }
+    .intel-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #21262d;
+      font-size: 12px;
+    }
+    .intel-row:last-child { border-bottom: none; }
+    .intel-name { font-weight: 700; color: var(--text); min-width: 52px; }
+    .intel-note { color: var(--muted); line-height: 1.5; }
+    .intel-status { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; white-space: nowrap; margin-left: auto; }
+    .status-online { background: rgba(38,166,65,0.15); color: #26a641; border: 1px solid rgba(38,166,65,0.3); }
+    .status-brb { background: rgba(250,204,21,0.12); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+    .status-mia { background: rgba(218,54,51,0.12); color: #da3633; border: 1px solid rgba(218,54,51,0.3); }
+    .logo-hint { font-size: 10px; color: var(--muted2); text-align: center; margin-top: 10px; }
+
     /* Progress bar */
     .prob-bar {
       height: 8px;
@@ -721,26 +771,26 @@
     <div class="market-header">
       <div class="market-category">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-        Medical Research
+        Prostate MRI Segmentation
       </div>
 
-      <h1 class="market-title">Will the group break the 1,000 cases barrier in their prostate MRI segmentation pipeline before Apr 9, 2026?</h1>
+      <h1 class="market-title">Will the group reach 0 rejected segmentations in their prostate MRI curation pipeline by end of April 9, 2026?</h1>
 
       <div class="prob-block">
-        <div class="prob-pct" id="yesProb">23%</div>
+        <div class="prob-pct" id="yesProb">41%</div>
         <div>
           <div class="prob-label">chance</div>
-          <div class="prob-change">▼ 4% today</div>
+          <div class="prob-change">▲ 18% today</div>
         </div>
       </div>
 
       <div class="prob-bar">
-        <div class="prob-bar-fill" id="probFill" style="width: 23%;"></div>
+        <div class="prob-bar-fill" id="probFill" style="width: 41%;"></div>
       </div>
 
       <div class="prob-labels">
-        <span class="yes">Yes 23¢</span>
-        <span class="no">No 77¢</span>
+        <span class="yes">Yes 41¢</span>
+        <span class="no">No 59¢</span>
       </div>
 
       <div class="bet-btns">
@@ -787,42 +837,78 @@
     <div class="activity-card" id="tab-activity">
       <div class="activity-header">Recent activity</div>
 
-      <div class="activity-item">
-        <div class="avatar" style="background: #1a3a2a; color: #26a641;">CR</div>
+      <!-- 🥚 Mikki — known for doing insane case counts -->
+      <div class="activity-item" title="insider tip: mikki does not track progress. she just does cases.">
+        <div class="avatar" style="background: #1a3a1a; color: #00ff88;">MK</div>
         <div class="activity-body">
-          <div class="activity-user">CryptoRodrigo</div>
-          <div class="activity-action">Bought <span class="no-tag">No</span> · prostate data curation is brutally slow</div>
-          <div class="activity-time">3 minutes ago</div>
+          <div class="activity-user">mikki_annotates</div>
+          <div class="activity-action">Bought <span class="yes-tag">Yes</span> · already reviewed and fixed 200 segmentations this morning. what rejections?</div>
+          <div class="activity-time">2 minutes ago</div>
         </div>
-        <div class="activity-amount">$120</div>
+        <div class="activity-amount">$800</div>
       </div>
 
-      <div class="activity-item">
-        <div class="avatar" style="background: #2a1a3a; color: #a26aff;">ML</div>
+      <!-- 🥚 Tiago — PhD student, market creator, hedging himself -->
+      <div class="activity-item" title="fun fact: tiago created this market and immediately bought No to hedge his own lab">
+        <div class="avatar" style="background: #1a2a3a; color: #00d4ff;">TC</div>
         <div class="activity-body">
-          <div class="activity-user">MedLabsLisbon</div>
-          <div class="activity-action">Bought <span class="no-tag">No</span> · QC rejections will kill the throughput</div>
-          <div class="activity-time">11 minutes ago</div>
-        </div>
-        <div class="activity-amount">$300</div>
-      </div>
-
-      <div class="activity-item">
-        <div class="avatar" style="background: #1a2a3a; color: #00d4ff;">dx</div>
-        <div class="activity-body">
-          <div class="activity-user">degenxr</div>
-          <div class="activity-action">Bought <span class="yes-tag">Yes</span> · team seems motivated, I'll fade the No</div>
-          <div class="activity-time">34 minutes ago</div>
+          <div class="activity-user">tiago_phd</div>
+          <div class="activity-action">Bought <span class="no-tag">No</span> · I made this market. Hedging my own lab's segmentation sprint. Don't dm me.</div>
+          <div class="activity-time">7 minutes ago</div>
         </div>
         <div class="activity-amount">$50</div>
+      </div>
+
+      <!-- 🥚 Fabian — PhD student, all-in -->
+      <div class="activity-item" title="fabian has been working on this pipeline for 3 years. he feels personally responsible for every rejection.">
+        <div class="avatar" style="background: #2a1a3a; color: #c084fc;">FB</div>
+        <div class="activity-body">
+          <div class="activity-user">fabian_phd</div>
+          <div class="activity-action">Bought <span class="yes-tag">Yes</span> · 3 years of PhD building this segmentation pipeline. we WILL hit zero rejected.</div>
+          <div class="activity-time">14 minutes ago</div>
+        </div>
+        <div class="activity-amount">$150</div>
+      </div>
+
+      <!-- 🥚 Vilma — PhD student, methodical -->
+      <div class="activity-item" title="vilma keeps a spreadsheet. the spreadsheet says yes.">
+        <div class="avatar" style="background: #3a1a2a; color: #f472b6;">VL</div>
+        <div class="activity-body">
+          <div class="activity-user">vilma_phd</div>
+          <div class="activity-action">Bought <span class="yes-tag">Yes</span> · curation pipeline is running clean. rejection rate is dropping. we're close.</div>
+          <div class="activity-time">22 minutes ago</div>
+        </div>
+        <div class="activity-amount">$200</div>
+      </div>
+
+      <!-- 🥚 Floor — student, positive vibes -->
+      <div class="activity-item" title="floor has been quietly doing cases without complaint. respect.">
+        <div class="avatar" style="background: #1a3a3a; color: #34d399;">FL</div>
+        <div class="activity-body">
+          <div class="activity-user">floor_student</div>
+          <div class="activity-action">Bought <span class="yes-tag">Yes</span> · the segmentations I'm reviewing look mostly fine. fixing the rejects one by one. still going.</div>
+          <div class="activity-time">45 minutes ago</div>
+        </div>
+        <div class="activity-amount">$100</div>
+      </div>
+
+      <!-- 🥚 Mark — still on VPN issues, no contract -->
+      <div class="activity-item" title="mark has been 'almost set up' for 3 weeks. the vpn ticket is still open.">
+        <div class="avatar" style="background: #3a3a1a; color: #facc15;">MR</div>
+        <div class="activity-body">
+          <div class="activity-user">mark_pending</div>
+          <div class="activity-action" style="color: var(--muted2); font-style: italic;">Tried to place a bet — VPN timed out. Contract still processing. Will try again tomorrow probably.</div>
+          <div class="activity-time">1 hour ago</div>
+        </div>
+        <div class="activity-amount" style="color: var(--muted2);">—</div>
       </div>
 
       <div class="activity-item">
         <div class="avatar" style="background: #3a1a1a; color: #ff6a6a;">RN</div>
         <div class="activity-body">
           <div class="activity-user">RadiologistNuno</div>
-          <div class="activity-action">Bought <span class="no-tag">No</span> · 1000 cases with proper QC in &lt;1 month? No chance</div>
-          <div class="activity-time">1 hour ago</div>
+          <div class="activity-action">Bought <span class="no-tag">No</span> · zero rejected segmentations means every prostate mask is clean. one bad slice and you're stuck.</div>
+          <div class="activity-time">2 hours ago</div>
         </div>
         <div class="activity-amount">$250</div>
       </div>
@@ -831,30 +917,10 @@
         <div class="avatar" style="background: #2a2a1a; color: #ffd700;">KM</div>
         <div class="activity-body">
           <div class="activity-user">KaggleMaster</div>
-          <div class="activity-action">Bought <span class="no-tag">No</span> · group segmentation pipelines always take 3x longer than expected</div>
-          <div class="activity-time">2 hours ago</div>
+          <div class="activity-action">Bought <span class="no-tag">No</span> · group QC pipelines always find one last edge case at 11pm</div>
+          <div class="activity-time">4 hours ago</div>
         </div>
         <div class="activity-amount">$180</div>
-      </div>
-
-      <div class="activity-item">
-        <div class="avatar" style="background: #1a3a3a; color: #00b4b4;">SC</div>
-        <div class="activity-body">
-          <div class="activity-user">SegCzar</div>
-          <div class="activity-action">Bought <span class="yes-tag">Yes</span> · nnU-Net automation can help, not all manual</div>
-          <div class="activity-time">3 hours ago</div>
-        </div>
-        <div class="activity-amount">$75</div>
-      </div>
-
-      <div class="activity-item">
-        <div class="avatar" style="background: #3a2a1a; color: #ff9a3a;">AP</div>
-        <div class="activity-body">
-          <div class="activity-user">AlgoProf</div>
-          <div class="activity-action">Bought <span class="no-tag">No</span> · the real blocker is bad DICOM metadata, source of truth is always messy</div>
-          <div class="activity-time">5 hours ago</div>
-        </div>
-        <div class="activity-amount">$400</div>
       </div>
 
       <div class="activity-item">
@@ -870,41 +936,74 @@
 
     <!-- COMMENTS -->
     <div class="activity-card" id="tab-comments" style="display:none;">
-      <div class="activity-header">Comments</div>
+      <div class="activity-header">Comments (18)</div>
 
-      <div class="comment-item">
-        <div class="avatar" style="background: #2a1a3a; color: #a26aff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">ML</div>
+      <!-- 🥚 Mikki -->
+      <div class="comment-item" title="mikki has been annotating since 7am. she did not eat lunch.">
+        <div class="avatar" style="background: #1a3a1a; color: #00ff88; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">MK</div>
         <div class="comment-body">
-          <div class="comment-author">MedLabsLisbon <span>· 11 min ago · No holder</span></div>
-          <div class="comment-text">I've done prostate MRI data curation before. Between failed QC, missing sequences, and patient consent issues, you lose easily 30-40% of cases. 1000 remaining cases segmented before May? That's extremely optimistic.</div>
-          <div class="comment-likes">♥ 12</div>
+          <div class="comment-author">mikki_annotates <span>· 2 min ago · Yes holder</span></div>
+          <div class="comment-text">I don't get what the fuss is about. You open the case, look at the segmentation mask, approve it or correct it. Repeat. I've gone through 200 prostate segmentations today already. The rejected pile is visibly going down. Betting Yes obviously.</div>
+          <div class="comment-likes">♥ 31</div>
         </div>
       </div>
 
-      <div class="comment-item">
-        <div class="avatar" style="background: #1a2a3a; color: #00d4ff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">dx</div>
+      <!-- 🥚 Fabian -->
+      <div class="comment-item" title="fabian wrote the original pipeline. he is emotionally invested.">
+        <div class="avatar" style="background: #2a1a3a; color: #c084fc; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">FB</div>
         <div class="comment-body">
-          <div class="comment-author">degenxr <span>· 34 min ago · Yes holder</span></div>
-          <div class="comment-text">No position. My thesis: the group has strong motivation to finish. Also the last push before a deadline is always the fastest. Fading the doom.</div>
-          <div class="comment-likes">♥ 4</div>
+          <div class="comment-author">fabian_phd <span>· 14 min ago · Yes holder</span></div>
+          <div class="comment-text">Three years. THREE YEARS building this prostate segmentation curation pipeline. Every rejected mask has a reason — bad auto-seg, wrong zone boundary, missing slice — and we know exactly what each one is. We are fixing them. We are hitting zero today. I don't accept any other outcome.</div>
+          <div class="comment-likes">♥ 44</div>
+        </div>
+      </div>
+
+      <!-- 🥚 Vilma -->
+      <div class="comment-item" title="vilma's spreadsheet has a tab called 'contingency'. she is prepared.">
+        <div class="avatar" style="background: #3a1a2a; color: #f472b6; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">VL</div>
+        <div class="comment-body">
+          <div class="comment-author">vilma_phd <span>· 22 min ago · Yes holder</span></div>
+          <div class="comment-text">I've been tracking the segmentation rejection count in a spreadsheet since week one. Each rejected mask gets triaged: auto-seg failure, zone delineation issue, or just needs a manual touch-up. The curve is trending down correctly. Based on current curation throughput + Mikki's rate today, we should hit zero rejected between 17:00 and 21:00 CET. Bought Yes.</div>
+          <div class="comment-likes">♥ 19</div>
+        </div>
+      </div>
+
+      <!-- 🥚 Tiago -->
+      <div class="comment-item" title="tiago created this market as a joke and now can't stop refreshing it">
+        <div class="avatar" style="background: #1a2a3a; color: #00d4ff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">TC</div>
+        <div class="comment-body">
+          <div class="comment-author">tiago_phd <span>· 7 min ago · No holder · Market creator</span></div>
+          <div class="comment-text">I made this market as a bit about our prostate segmentation curation sprint. I did not expect people to actually trade $1300 on it. For the record I bought No to hedge — if the team clears all rejected segmentations I'm happy, if not I make money. Win-win. Please stop asking me for insider info, I'm also curating.</div>
+          <div class="comment-likes">♥ 52</div>
+        </div>
+      </div>
+
+      <!-- 🥚 Floor -->
+      <div class="comment-item" title="floor has been doing cases quietly for hours. no drama. just cases.">
+        <div class="avatar" style="background: #1a3a3a; color: #34d399; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">FL</div>
+        <div class="comment-body">
+          <div class="comment-author">floor_student <span>· 45 min ago · Yes holder</span></div>
+          <div class="comment-text">The segmentations I'm reviewing are mostly fixable — a few zone boundary corrections, one or two where the auto-seg completely missed. Nothing crazy. Still going. Bought Yes.</div>
+          <div class="comment-likes">♥ 8</div>
+        </div>
+      </div>
+
+      <!-- 🥚 Mark -->
+      <div class="comment-item" title="mark's contract was supposed to be signed 'last week'. it was not signed last week.">
+        <div class="avatar" style="background: #3a3a1a; color: #facc15; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">MR</div>
+        <div class="comment-body">
+          <div class="comment-author">mark_pending <span>· 1 hr ago · —</span></div>
+          <div class="comment-text">Hi, I would love to help review segmentations but I can't access the curation platform yet. My contract is still being processed and the VPN keeps timing out before I can log in. IT says it'll be fixed "soon". I've been told I can start contributing "any day now" for about 3 weeks. Rooting for Yes from the sidelines! Go team!</div>
+          <div class="comment-likes">♥ 67</div>
         </div>
       </div>
 
       <div class="comment-item">
         <div class="avatar" style="background: #3a1a1a; color: #ff6a6a; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">RN</div>
         <div class="comment-body">
-          <div class="comment-author">RadiologistNuno <span>· 1 hr ago · No holder</span></div>
-          <div class="comment-text">The problem is you cannot brute-force MRI segmentation quality. Every mask needs a trained eye to validate peripheral zone vs central gland delineation. I'm a radiologist, I know the pain. This market should be at 10% not 23%.</div>
+          <div class="comment-author">RadiologistNuno <span>· 2 hr ago · No holder</span></div>
+          <div class="comment-text">Zero rejected segmentations means every prostate MRI mask in the dataset has been reviewed and accepted. One slice with a blown peripheral zone boundary, one case where the auto-seg leaked outside the gland, and you're stuck. The market is underpriced on No. That said — if mikki_annotates is real, maybe reconsider everything.</div>
           <div class="comment-likes">♥ 29</div>
-        </div>
-      </div>
-
-      <div class="comment-item">
-        <div class="avatar" style="background: #1a3a2a; color: #26a641; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">CR</div>
-        <div class="comment-body">
-          <div class="comment-author">CryptoRodrigo <span>· 3 min ago · No holder</span></div>
-          <div class="comment-text">Just loaded up on No. Data curation + segmentation + QC for 1000 prostate MRI cases in this timeframe is borderline impossible. Wish them luck though lol</div>
-          <div class="comment-likes">♥ 7</div>
         </div>
       </div>
     </div>
@@ -912,17 +1011,19 @@
     <!-- RULES -->
     <div class="info-card" id="tab-rules" style="display:none;">
       <h3>Resolution Criteria</h3>
-      <p>This market resolves <strong>Yes</strong> if the group's prostate MRI segmentation dataset drops below 1,000 pending cases (i.e., the total count of cases remaining to be segmented in the data curation pipeline crosses the 1,000 threshold going downward) before 23:59 UTC on Apr 9, 2026.</p>
-      <p>Resolution will be based on a screenshot or public commit from the project's internal tracking system or GitHub repository, as shared by the market creator or a designated oracle. The count must reflect QC-accepted segmentation masks, not raw or provisional outputs.</p>
-      <p>This market resolves <strong>No</strong> if the 1,000-case barrier has not been broken by the resolution date, or if no verifiable evidence is provided.</p>
-      <p>Ambiguous cases (e.g., cases pending final QC review at the exact resolution time) will be adjudicated by Polymarket admins based on best available evidence.</p>
+      <p>This market resolves <strong>Yes</strong> if the group's prostate MRI segmentation curation pipeline reaches exactly 0 rejected masks — meaning every segmentation in the dataset has been reviewed and either accepted or corrected and re-accepted — before 23:59 CET on April 9, 2026.</p>
+      <p>A "rejected segmentation" is any case flagged during curation review as having an unacceptable mask (e.g., incorrect zone boundaries, auto-seg leakage, missing coverage). The rejected count must reach zero in the curation tracking system, not merely in a local export.</p>
+      <p>Resolution will be based on a screenshot or dashboard export from the project's segmentation curation platform, as provided by the market creator (<em>tiago_phd</em>) or a designated oracle. Auto-approved masks without human review do not count toward resolution.</p>
+      <p>This market resolves <strong>No</strong> if any rejected segmentations remain in the pipeline at the resolution deadline, or if no verifiable evidence of zero-rejection status is provided within 2 hours of expiry.</p>
+      <p>Ambiguous cases (e.g., a mask flagged "pending re-review" at exactly 23:59) will be counted as rejected for resolution purposes. Cases attributed to Mark (pending onboarding) are excluded from all counts, as he has not been granted platform access.</p>
       <div class="tag-list">
+        <span class="tag">Prostate MRI</span>
+        <span class="tag">Segmentation Curation</span>
         <span class="tag">Medical Imaging</span>
         <span class="tag">Machine Learning</span>
-        <span class="tag">Research</span>
         <span class="tag">Data Curation</span>
-        <span class="tag">Prostate MRI</span>
         <span class="tag">PhD Life</span>
+        <span class="tag">VPN Issues</span>
       </div>
     </div>
 
@@ -940,8 +1041,8 @@
       <div class="bet-card-title">Place your bet</div>
 
       <div class="outcome-tabs">
-        <div class="outcome-tab yes active" id="sideYes" onclick="selectSide('yes')">Yes · 23¢</div>
-        <div class="outcome-tab no" id="sideNo" onclick="selectSide('no')">No · 77¢</div>
+        <div class="outcome-tab yes active" id="sideYes" onclick="selectSide('yes')">Yes · 41¢</div>
+        <div class="outcome-tab no" id="sideNo" onclick="selectSide('no')">No · 59¢</div>
       </div>
 
       <div class="input-group">
@@ -978,22 +1079,22 @@
       <div class="related-title">Related markets</div>
 
       <div class="related-item">
-        <div class="related-market-name">Will the group's prostate segmentation paper be submitted to a journal before June 2026?</div>
+        <div class="related-market-name">Will the prostate MRI segmentation paper be submitted before June 2026?</div>
         <div class="related-pct green">31%</div>
       </div>
 
       <div class="related-item">
-        <div class="related-market-name">Will nnU-Net v3 be used in the final prostate MRI pipeline?</div>
-        <div class="related-pct green">61%</div>
+        <div class="related-market-name">Will Mark get his VPN working before the dataset is finished?</div>
+        <div class="related-pct red">12%</div>
       </div>
 
       <div class="related-item">
-        <div class="related-market-name">Will the dataset exceed 3,000 total cases at QC completion?</div>
-        <div class="related-pct red">18%</div>
+        <div class="related-market-name">Will Mikki single-handedly clear more than 50% of the remaining cases?</div>
+        <div class="related-pct green">74%</div>
       </div>
 
       <div class="related-item">
-        <div class="related-market-name">Will PhD thesis defence happen before December 2026?</div>
+        <div class="related-market-name">Will a PhD thesis defence happen before December 2026?</div>
         <div class="related-pct red">40%</div>
       </div>
     </div>
@@ -1002,11 +1103,47 @@
 
 </div><!-- /page -->
 
+<!-- 🥚 EASTER EGG: Team Intel panel (unlock by clicking logo 5×) -->
+<div id="teamIntel">
+  <h4>🔒 Team Intel <button onclick="document.getElementById('teamIntel').style.display='none'">×</button></h4>
+  <div class="intel-row">
+    <span class="intel-name">Fabian</span>
+    <span class="intel-note">PhD student. Wrote the pipeline. Has cried exactly once about DICOM metadata. Very invested in this resolving Yes.</span>
+    <span class="intel-status status-online">annotating</span>
+  </div>
+  <div class="intel-row">
+    <span class="intel-name">Tiago</span>
+    <span class="intel-note">PhD student. Created this market as a joke. Refreshing it every 5 minutes. Bought No to hedge his own lab.</span>
+    <span class="intel-status status-brb">distracted</span>
+  </div>
+  <div class="intel-row">
+    <span class="intel-name">Vilma</span>
+    <span class="intel-note">PhD student. Has a spreadsheet for the spreadsheet. The pipeline respects her. She respects the pipeline.</span>
+    <span class="intel-status status-online">on track</span>
+  </div>
+  <div class="intel-row">
+    <span class="intel-name">Mikki</span>
+    <span class="intel-note">Not a PhD student. Does not need to be. Has done more cases today than most people do in a week. Frightening.</span>
+    <span class="intel-status status-online">240 cases</span>
+  </div>
+  <div class="intel-row">
+    <span class="intel-name">Floor</span>
+    <span class="intel-note">Student. Steady, reliable, no drama. Has been quietly clearing cases since morning. The unsung hero.</span>
+    <span class="intel-status status-online">still going</span>
+  </div>
+  <div class="intel-row">
+    <span class="intel-name">Mark</span>
+    <span class="intel-note">Student. Contract pending. VPN ticket open since week 3. Has been told "soon" fourteen times. Cannot access the system. Cheering from outside.</span>
+    <span class="intel-status status-mia">VPN down</span>
+  </div>
+  <div class="logo-hint">unlock: click the Polymarket logo 5×</div>
+</div>
+
 <script>
   /* ── STATE ── */
   let currentSide = 'yes';
-  const YES_PRICE = 0.23;
-  const NO_PRICE  = 0.77;
+  const YES_PRICE = 0.41;
+  const NO_PRICE  = 0.59;
 
   function selectSide(side) {
     currentSide = side;
@@ -1052,11 +1189,10 @@
     const canvas = document.getElementById('priceChart');
     const ctx = canvas.getContext('2d');
 
-    // Seed a plausible 1-week price history ending at 23%
-    // Starting around 42%, trending downward (market is pessimistic)
+    // 1-week price history ending at 41% — started low, massive rally on final day
     const rawPts = [
-      42, 40, 44, 41, 38, 36, 39, 35, 33, 31,
-      34, 30, 28, 32, 29, 27, 25, 28, 26, 24, 23
+      18, 20, 17, 22, 20, 19, 23, 21, 20, 22,
+      24, 22, 25, 23, 26, 25, 27, 29, 32, 38, 41
     ];
 
     const dpr = window.devicePixelRatio || 1;
@@ -1079,7 +1215,7 @@
     // Grid lines
     ctx.strokeStyle = '#30363d';
     ctx.lineWidth = 0.5;
-    [25, 35, 45].forEach(v => {
+    [20, 30, 40].forEach(v => {
       const y = yOf(v);
       ctx.beginPath();
       ctx.moveTo(pad.left, y);
@@ -1135,6 +1271,20 @@
   })();
 
   updateSummary();
+
+  /* ── EASTER EGG: logo click counter ── */
+  let logoClicks = 0, logoTimer;
+  document.querySelector('a.logo').addEventListener('click', function(e) {
+    e.preventDefault();
+    logoClicks++;
+    clearTimeout(logoTimer);
+    logoTimer = setTimeout(() => { logoClicks = 0; }, 2000);
+    if (logoClicks >= 5) {
+      logoClicks = 0;
+      const panel = document.getElementById('teamIntel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+  });
 </script>
 </body>
 </html>
