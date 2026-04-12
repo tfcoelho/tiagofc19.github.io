@@ -1,0 +1,252 @@
+<!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f1ea"><title>Análise — App de carpooling PT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f1ea;--ink:#1a1917;--ink2:#4a4842;--line:#d7d1c2;--accent:#c2410c;--ok:#15803d;--warn:#a16207;--card:#fbf8f1}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:4rem 1.5rem 6rem}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.01em;line-height:1.1}
+h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:300;font-style:italic;margin-bottom:.4rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink2);margin-bottom:2rem}
+.sub{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--ink2);font-style:italic;margin-bottom:3rem;max-width:60ch}
+h2{font-size:2rem;margin:4rem 0 .4rem;font-weight:500;border-top:1px solid var(--line);padding-top:2.5rem}
+h2 .num{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-style:normal;color:var(--accent);display:block;margin-bottom:.6rem;font-weight:400}
+h3{font-size:1.2rem;margin:2rem 0 .6rem;font-weight:500}
+p{margin-bottom:1rem;color:var(--ink)}
+p+p{text-indent:1.5em}
+strong{font-weight:600;color:var(--ink)}
+em{font-family:'Fraunces',serif;font-style:italic}
+.lede{font-family:'Fraunces',serif;font-size:1.35rem;line-height:1.5;color:var(--ink);margin-bottom:2rem;font-weight:300}
+.lede::first-letter{font-size:3.5em;float:left;line-height:.85;padding:.05em .08em 0 0;font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:1.5rem 0}
+.grid2>div{background:var(--card);padding:1.25rem 1.5rem}
+.grid2 h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink2);margin-bottom:.6rem;font-weight:500}
+.grid2 li{margin-bottom:.4rem;font-size:14px;color:var(--ink2);list-style:none;padding-left:1rem;position:relative}
+.grid2 li::before{content:"—";position:absolute;left:0;color:var(--line)}
+.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:1.5rem 0}
+.stat>div{background:var(--card);padding:1.1rem 1rem}
+.stat .n{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:400;display:block;line-height:1.1}
+.stat .l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-top:.3rem}
+.chart-box{background:var(--card);border:1px solid var(--line);padding:1.5rem;margin:1.5rem 0;position:relative;height:340px}
+.chart-cap{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-top:.6rem}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin:2rem 0 1rem}
+.tabs button{background:none;border:none;border-bottom:2px solid transparent;padding:.6rem 1rem;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);cursor:pointer;margin-bottom:-1px}
+.tabs button.on{border-bottom-color:var(--accent);color:var(--ink)}
+.tab-body{display:none}.tab-body.on{display:block}
+blockquote{border-left:2px solid var(--accent);padding:.3rem 0 .3rem 1.2rem;margin:1.5rem 0;font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--ink)}
+table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:14px}
+th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line)}
+th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);font-weight:500;background:var(--card)}
+td.num{font-family:'JetBrains Mono',monospace;text-align:right}
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:1.5rem 0}
+.swot>div{background:var(--card);padding:1.3rem 1.5rem;min-height:200px}
+.swot h4{font-family:'Fraunces',serif;font-size:1.3rem;font-style:italic;font-weight:400;margin-bottom:.8rem}
+.swot .s h4{color:var(--ok)}.swot .w h4{color:var(--accent)}.swot .o h4{color:#1e40af}.swot .t h4{color:#7f1d1d}
+.swot ul{list-style:none}
+.swot li{padding:.35rem 0;font-size:13.5px;color:var(--ink2);padding-left:1rem;position:relative}
+.swot li::before{content:"·";position:absolute;left:.2rem;color:var(--ink)}
+.pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--ink);color:var(--bg);margin-right:.3rem}
+.pill.ok{background:var(--ok)}.pill.w{background:var(--warn)}.pill.b{background:var(--accent)}
+hr{border:none;border-top:1px solid var(--line);margin:3rem 0}
+.foot{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem -1.5rem;padding:0 1.5rem}
+.table-wrap table{min-width:520px;margin:0}
+@media(max-width:720px){
+  html,body{font-size:14.5px}
+  .wrap{padding:2rem 1.1rem 3.5rem}
+  h1{font-size:clamp(2.4rem,11vw,3.5rem);line-height:1.05}
+  h2{font-size:1.6rem;margin:3rem 0 .3rem;padding-top:2rem}
+  h3{font-size:1.1rem}
+  .sub{font-size:1.05rem;margin-bottom:2rem}
+  .lede{font-size:1.15rem}
+  .lede::first-letter{font-size:3em}
+  .eyebrow{margin-bottom:1.5rem}
+  .grid2,.swot{grid-template-columns:1fr}
+  .swot>div{min-height:auto}
+  .stat{grid-template-columns:1fr 1fr}
+  .stat .n{font-size:1.5rem}
+  .chart-box{padding:1rem .6rem;height:300px;margin-left:-.3rem;margin-right:-.3rem}
+  .tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .tabs button{flex-shrink:0;padding:.55rem .8rem;font-size:10px}
+  blockquote{font-size:1rem;padding-left:1rem}
+  .foot{flex-direction:column;gap:.4rem}
+  p+p{text-indent:1em}
+  table{font-size:13px}
+  th,td{padding:.55rem .6rem}
+  .table-wrap{margin:1.5rem -1.1rem;padding:0 1.1rem}
+}
+@media(max-width:420px){
+  .stat{grid-template-columns:1fr 1fr}
+  .stat .n{font-size:1.35rem}
+  .chart-box{height:280px}
+}
+</style></head><body><div class="wrap">
+
+<div class="eyebrow">Documento de trabalho · v1 · Abril 2026</div>
+<h1>App de<br><em>carpooling</em>.</h1>
+<p class="sub">Análise estratégica para uma app de boleias focada no mercado português. Nicho, riscos, concorrência, custos e decisão.</p>
+
+<p class="lede">Existe um buraco visível entre o Bolt/Uber (caros, instantâneos, urbanos) e a BlaBlaCar (longa distância, intercidades). O buraco vive em corredores universitários, commute suburbano e eventos. O objetivo deste documento não é vender o projeto — é testá-lo contra a realidade.</p>
+
+<div class="stat">
+<div><span class="n">~1.5M</span><div class="l">População-alvo PT</div></div>
+<div><span class="n">100–250k</span><div class="l">MAU cenário maduro</div></div>
+<div><span class="n">0.08–0.13</span><div class="l">€/km plafonado</div></div>
+<div><span class="n">2.5–6k€</span><div class="l">Cash 6–9 meses</div></div>
+</div>
+
+<h2><span class="num">01 · Mercado</span>Onde está a oportunidade real</h2>
+<p>O mercado global de carpooling ronda os <strong>17–20 mil milhões USD em 2024</strong>, a crescer 10–16% ao ano consoante a definição. Portugal é um mercado pequeno mas órfão: grande demais para ignorar, pequeno demais para atrair uma startup estrangeira dedicada. A BlaBlaCar serve longa distância. Uber/Bolt servem o urbano instantâneo. O que fica por servir é precisamente o meio.</p>
+
+<div class="grid2">
+<div><h4>Servido hoje</h4><ul><li>Lisboa–Porto, Lisboa–Algarve (BlaBlaCar)</li><li>Urbano instantâneo 5–15 km (Bolt, Uber, Free Now)</li><li>Carsharing (Kinto, Cityhop)</li></ul></div>
+<div><h4>Não servido — o teu território</h4><ul><li>Commute suburbano diário 15–50 km</li><li>Corredores universitários de fim-de-semana</li><li>Eventos âncora (festivais, concertos, festas académicas)</li><li>Trajetos abaixo de 150 km não-urbanos</li></ul></div>
+</div>
+
+<h3>Economia do condutor por distância</h3>
+<p>Abaixo de 20 km o condutor perde dinheiro se houver qualquer desvio. O <em>sweet spot</em> começa aos 30 km e torna-se genuinamente atrativo dos 50 aos 150 km. Este é o gráfico que define onde a app pode ou não pode operar.</p>
+<div class="chart-box"><canvas id="c1" role="img" aria-label="Ganho líquido do condutor e preço comparativo por distância">Condutor fica positivo a partir de 25-30 km.</canvas></div>
+<div class="chart-cap">Fig. 1 · Ganho líquido assume 85% do preço para condutor, desvio médio 5 km</div>
+
+<h2><span class="num">02 · Modelo</span>Como funciona na prática</h2>
+<p>Dois modelos possíveis, com trade-offs opostos. A maior parte das plataformas maduras usa o primeiro — o condutor define rota fixa e publica pickup points. O passageiro desloca-se até lá. Isto elimina o problema do desvio mas transfere fricção para o passageiro.</p>
+
+<div class="tabs">
+<button class="on" onclick="tab(event,'t1')">Pickup fixo</button>
+<button onclick="tab(event,'t2')">Door-to-door</button>
+<button onclick="tab(event,'t3')">Evento âncora</button>
+</div>
+<div id="t1" class="tab-body on">
+<p><span class="pill ok">Recomendado</span> Condutor define origem-destino e 2-3 pontos de encontro (Sete Rios, Gaia, Braga estação). Passageiro vai ter ao pickup. <em>Funciona</em> em corredores com pickups óbvios; falha se o pickup obriga a 40 min de deslocação.</p>
+</div>
+<div id="t2" class="tab-body">
+<p><span class="pill w">Só em distâncias longas</span> Condutor desvia para apanhar passageiro. Só funciona economicamente acima de 30 km e com desvios inferiores a 15% do trajeto. Útil como opção premium paga, não como base.</p>
+</div>
+<div id="t3" class="tab-body">
+<p><span class="pill b">Maior oportunidade</span> Destino único, procura sincronizada, ida e volta agrupadas. Ticket médio 5-15 €/pessoa, 4 passageiros/carro = 20-60 € por noite para o condutor. Risco: passageiros embriagados no regresso.</p>
+</div>
+
+<h3>Receita e plafond regulatório</h3>
+<p>Ponto crítico que muita gente ignora: a <strong>Lei 45/2018 (TVDE)</strong> só permite transporte remunerado com licença. A exceção é carpooling não-lucrativo — o condutor não pode ganhar mais do que os custos proporcionais. Isto obriga a plafonar o preço/km a ~0,08–0,13 €. Se subires acima, deixas de ser carpooling e tornas-te TVDE ilegal. Esta é a regra que mantém a BlaBlaCar legal e que tem de manter a tua app legal.</p>
+
+<h2><span class="num">03 · SWOT</span>Análise estrutural</h2>
+<div class="swot">
+<div class="s"><h4>Strengths</h4><ul>
+<li>Gap real e não servido no mercado português</li>
+<li>Custo de dev baixo com AI-assisted coding</li>
+<li>Preço imbatível vs Bolt/Uber para médias distâncias</li>
+<li>Narrativa ESG forte (emissões, custo de vida)</li>
+<li>Modelo asset-light: sem carros, sem motoristas, sem frota</li>
+<li>Possibilidade de ver perfil do condutor antes da viagem</li>
+</ul></div>
+<div class="w"><h4>Weaknesses</h4><ul>
+<li>Mercado two-sided: chicken-and-egg brutal</li>
+<li>Margem por transação estruturalmente baixa</li>
+<li>Teto de escala pequeno (Portugal)</li>
+<li>Fundador sem experiência prévia em marketplaces</li>
+<li>Liquidez exige densidade geográfica inicial</li>
+<li>Dependência crítica de trust & safety desde o dia zero</li>
+</ul></div>
+<div class="o"><h4>Opportunities</h4><ul>
+<li>BlaBlaCar Daily ainda não chegou a Portugal</li>
+<li>Festivais e concertos sem solução dedicada</li>
+<li>Corredores universitários Coimbra–Lisboa, Braga–Porto</li>
+<li>Parcerias com câmaras/universidades (subsídios)</li>
+<li>Eleitorado jovem sensível a preço + clima</li>
+<li>Expansão futura para Espanha (mesmo gap)</li>
+</ul></div>
+<div class="t"><h4>Threats</h4><ul>
+<li>Reclassificação como TVDE pelo IMT → game over</li>
+<li>BlaBlaCar decide lançar Daily em PT</li>
+<li>Incidente grave (agressão, acidente) nos primeiros meses</li>
+<li>Uber/Bolt baixam preços agressivamente</li>
+<li>Fraude de pagamento, contas fake, comissão por fora</li>
+<li>Mudanças no RGPD ou regime fiscal de ENI</li>
+</ul></div>
+</div>
+
+<h2><span class="num">04 · Riscos</span>Condutor e passageiro</h2>
+<p>Este é um produto em que a segurança <em>é</em> o produto. Se falhas aqui uma vez em público, fechas.</p>
+<div class="table-wrap"><table>
+<tr><th>Risco</th><th>Lado</th><th>Probabilidade</th><th>Impacto</th><th>Mitigação</th></tr>
+<tr><td>Condutor embriagado</td><td>Passageiro</td><td class="num">Baixa</td><td class="num">Alto</td><td>Rating rigoroso, botão SOS, verificação</td></tr>
+<tr><td>Agressão / assédio</td><td>Ambos</td><td class="num">Muito baixa</td><td class="num">Catastrófico</td><td>KYC, partilha tempo real, escrow</td></tr>
+<tr><td>Passageiro bêbado (eventos)</td><td>Condutor</td><td class="num">Média</td><td class="num">Médio</td><td>Prémio noturno, direito recusar, limpeza até 80€</td></tr>
+<tr><td>No-show</td><td>Ambos</td><td class="num">Alta</td><td class="num">Baixo</td><td>Pré-pagamento, taxa de cancelamento tardio</td></tr>
+<tr><td>Pagamento por fora</td><td>Plataforma</td><td class="num">Alta</td><td class="num">Médio</td><td>Chat apenas na app, rating bloqueado se fora</td></tr>
+<tr><td>Seguro não cobre</td><td>Condutor</td><td class="num">Baixa</td><td class="num">Catastrófico</td><td>Parceria com seguradora, add-on carpool</td></tr>
+<tr><td>Reclassificação TVDE</td><td>Plataforma</td><td class="num">Média</td><td class="num">Catastrófico</td><td>Parecer legal, plafond de preço</td></tr>
+</table></div>
+
+<h2><span class="num">05 · Concorrência</span>Quem está no mapa</h2>
+<div class="chart-box" style="height:300px"><canvas id="c2" role="img" aria-label="Posicionamento dos concorrentes por distância e preço">BlaBlaCar longa distância, Bolt/Uber urbano caro, gap no meio.</canvas></div>
+<div class="chart-cap">Fig. 2 · Posicionamento distância × preço — a tua zona é o quadrante livre</div>
+
+<p>A BlaBlaCar tem <strong>29 milhões de membros ativos em 21 países e 253 M€ de receita em 2023</strong>. O Uber e Bolt dispensam apresentações. O que não existe em Portugal é um player focado no commute e eventos. É aí que é possível entrar.</p>
+
+<h2><span class="num">06 · Custos</span>Orçamento realista</h2>
+<p>Cenário "tu fazes tudo, AI como copiloto, piloto num corredor + 1 evento âncora nos primeiros 9 meses".</p>
+<div class="table-wrap"><table>
+<tr><th>Categoria</th><th>Fase</th><th>Custo (€)</th><th>Corte possível?</th></tr>
+<tr><td>Claude/Cursor + ferramentas dev</td><td>Dev 3–4 meses</td><td class="num">200–500</td><td>Não</td></tr>
+<tr><td>Supabase/Firebase (tier gratuito → pago)</td><td>Dev + beta</td><td class="num">0–150</td><td>Não</td></tr>
+<tr><td>Apple Developer + Google Play</td><td>Lançamento</td><td class="num">~115</td><td>Não</td></tr>
+<tr><td>Domínio + email</td><td>Desde dia 1</td><td class="num">80–100</td><td>Não</td></tr>
+<tr><td>Consulta legal TVDE + parecer</td><td>Pré-lançamento</td><td class="num">500–1500</td><td><strong>Não cortar</strong></td></tr>
+<tr><td>T&amp;C + RGPD (Iubenda/Termly)</td><td>Pré-lançamento</td><td class="num">100–200</td><td>Adiar</td></tr>
+<tr><td>KYC (Onfido/IDnow)</td><td>Pré-lançamento</td><td class="num">500–1500</td><td>Fase 2</td></tr>
+<tr><td>Seguro RC plataforma</td><td>Lançamento</td><td class="num">400–800</td><td>Não</td></tr>
+<tr><td>Contabilidade (ENI)</td><td>Desde abertura</td><td class="num">300–600</td><td>Não</td></tr>
+<tr><td>Marketing piloto + referral</td><td>Lançamento</td><td class="num">800–3000</td><td>Esticar</td></tr>
+<tr><td colspan="2"><strong>Total cash 6–9 meses</strong></td><td class="num"><strong>2500–6000</strong></td><td>—</td></tr>
+</table></div>
+
+<div class="chart-box" style="height:320px"><canvas id="c3" role="img" aria-label="Decomposição do custo por categoria">Legal e marketing são os maiores.</canvas></div>
+<div class="chart-cap">Fig. 3 · Decomposição do custo médio (cenário realista, valor médio por categoria)</div>
+
+<h2><span class="num">07 · Validação</span>O que fazer antes de escrever código</h2>
+<blockquote>Construir primeiro, validar depois, é como gastar os teus 6k€ num boneco. Faz ao contrário.</blockquote>
+
+<p>Três passos de validação que custam quase nada e salvam-te meses:</p>
+
+<div class="grid2">
+<div><h4>Fase 1 · Landing + waitlist</h4><ul><li>1 semana · 50–100€</li><li>Segmentar por corredor (Coimbra–Lisboa, Braga–Porto, NOS Alive)</li><li>Medir rácio condutor/passageiro</li><li>Meta: 300+ inscritos antes de avançar</li></ul></div>
+<div><h4>Fase 2 · Entrevistas</h4><ul><li>2 semanas · 0€</li><li>15 condutores regulares + 15 passageiros</li><li>Perceber motivações e bloqueios</li><li>Red flag: condutores não querem estranhos no carro</li></ul></div>
+<div><h4>Fase 3 · MVP manual</h4><ul><li>4–6 semanas · 0€</li><li>Orquestrar 5–10 viagens por WhatsApp</li><li>Cobrar comissão simbólica</li><li>Sentir o fluxo real, tensões reais</li></ul></div>
+<div><h4>Só depois · Build</h4><ul><li>3–4 meses · 2500–6000€</li><li>Só se fases 1–3 deram sinal claro</li><li>Começar por 1 corredor, não nacional</li><li>Lançar com 1 evento âncora</li></ul></div>
+</div>
+
+<h2><span class="num">08 · Decisão</span>Vale a pena?</h2>
+<p>Honestamente: <strong>não é ideia má, é ideia difícil</strong>. A diferença importa. Ideias más têm valor criado negativo ou inexistente — não é o caso. Ideias difíceis têm valor claro mas caminho exigente — é exatamente esta. A razão pela qual Portugal ainda não tem um player dedicado não é porque a ideia não presta; é porque o mercado é pequeno demais para atrair uma startup estrangeira e Portugal tem poucos fundadores a atacar este espaço. Gap genuíno.</p>
+
+<p>Avanço condicional: <em>se</em> a fase 1 (landing + waitlist) produzir 300+ inscritos num corredor em 2 meses, <em>e</em> a fase 2 (entrevistas) confirmar que condutores regulares estão dispostos, <em>e</em> a fase 3 (MVP manual) conseguir 5+ viagens reais — então faz sentido investir os 2500–6000€ em build. Se qualquer uma destas três falhar, não avanças. Custo máximo de descoberta: ~150€ + o teu tempo.</p>
+
+<p>O risco mais subestimado não é o criminal nem o comercial — é o <strong>regulatório</strong>. A consulta legal antes de lançar é o investimento mais importante que vais fazer. Tudo o resto pode ser improvisado. Isso não.</p>
+
+<div class="foot"><span>Análise · Abril 2026</span><span>Para decisão interna</span></div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+function tab(e,id){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('on'));document.querySelectorAll('.tab-body').forEach(b=>b.classList.remove('on'));e.target.classList.add('on');document.getElementById(id).classList.add('on')}
+Chart.defaults.font.family="'Inter Tight',sans-serif";Chart.defaults.font.size=11;Chart.defaults.color='#4a4842';
+const dist=[10,20,30,50,80,120,180];
+const net=dist.map(d=>+(d*0.12*0.85 - d*0.19*0.3 - 0.95).toFixed(2));
+const pax=dist.map(d=>+(d*0.12).toFixed(2));
+const uber=dist.map(d=>+(d*0.75).toFixed(2));
+new Chart(document.getElementById('c1'),{type:'line',data:{labels:dist.map(d=>d+'km'),datasets:[
+ {label:'Ganho condutor',data:net,borderColor:'#15803d',backgroundColor:'#15803d',tension:.35,borderWidth:2.5,pointRadius:3},
+ {label:'Preço app (passageiro)',data:pax,borderColor:'#c2410c',backgroundColor:'#c2410c',tension:.35,borderWidth:2,borderDash:[5,4],pointRadius:2},
+ {label:'Bolt/Uber',data:uber,borderColor:'#1a1917',backgroundColor:'#1a1917',tension:.35,borderWidth:1.5,borderDash:[2,3],pointRadius:2}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,padding:14}}},scales:{y:{title:{display:true,text:'€',color:'#4a4842'},grid:{color:'#d7d1c2'}},x:{grid:{display:false}}}}});
+
+new Chart(document.getElementById('c2'),{type:'scatter',data:{datasets:[
+ {label:'BlaBlaCar',data:[{x:200,y:0.08}],backgroundColor:'#c2410c',pointRadius:12},
+ {label:'Bolt/Uber',data:[{x:8,y:0.75}],backgroundColor:'#1a1917',pointRadius:12},
+ {label:'Comboio/CP',data:[{x:150,y:0.05}],backgroundColor:'#a16207',pointRadius:9},
+ {label:'Tu · zona-alvo',data:[{x:50,y:0.12}],backgroundColor:'#15803d',pointRadius:16,pointStyle:'triangle'}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,padding:14}}},scales:{x:{type:'logarithmic',title:{display:true,text:'Distância (km)'},grid:{color:'#d7d1c2'}},y:{title:{display:true,text:'€ / km'},grid:{color:'#d7d1c2'},min:0,max:0.9}}}});
+
+new Chart(document.getElementById('c3'),{type:'bar',data:{labels:['Marketing','Legal','KYC','Seguro','Contabilidade','Ferramentas','Outros'],datasets:[{data:[1900,1000,1000,600,450,350,450],backgroundColor:['#c2410c','#1a1917','#a16207','#15803d','#4a4842','#7c2d12','#78716c']}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'€ (valor médio)'},grid:{color:'#d7d1c2'}},y:{grid:{display:false}}}}});
+</script></body></html>
