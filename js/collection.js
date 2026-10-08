@@ -189,7 +189,8 @@
     body.light #switcher-menu a { color: rgba(0,0,0,0.22); }
     body.light #switcher-menu a:hover { color: rgba(0,0,0,0.65); }
     body.light #switcher-menu a.current { color: rgba(0,0,0,0.75); }
-    body.light #more-btn { color: rgba(0,0,0,0.5); }
+    body.light #more-btn { color: rgba(0,0,0,0.5) !important; }
+    body.light #more-btn:hover { color: rgba(0,0,0,0.8) !important; }
     body.light #switcher-overlay { background: rgba(244,239,232,0.97); }
     body.light #switcher-overlay a { color: rgba(0,0,0,0.3); }
     body.light #switcher-overlay a.current { color: rgba(0,0,0,0.8); }
