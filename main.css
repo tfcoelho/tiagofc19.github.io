@@ -80,7 +80,7 @@ body.light #signature svg {
 /* ── Liquid glass ───────────────────────────────────────── */
 :root {
   --glass-bg: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0.04) 100%), rgba(20,20,20,0.12);
-  --glass-blur: blur(2px) saturate(160%) brightness(1.04);
+  --glass-blur: blur(2px) saturate(100%) brightness(1.04);
   /* Chromium only (see js/player.js): refracts the backdrop through an SVG displacement map */
   --glass-refract: url(#glass-distort) blur(1.5px) saturate(160%) brightness(1.04);
   --glass-shadow:
