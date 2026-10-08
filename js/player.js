@@ -18,6 +18,26 @@ const TRACKS = [
   { title: 'Inhale',      artist: 'RÜFÜS DU SOL', src: _base + 'music/RUFUS DU SOL - Inhale.mp3',       cover: _base + 'music/inhale_cover.jpg' },
 ];
 
+// ── Liquid glass distortion ────────────────────────────────────────────────
+// Only Chromium supports SVG filters in backdrop-filter; other browsers keep
+// the plain blur from main.css.
+(function () {
+  const brands = navigator.userAgentData && navigator.userAgentData.brands;
+  if (!brands || !brands.some(b => b.brand === 'Chromium')) return;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden';
+  svg.innerHTML = `
+    <filter id="glass-distort" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="2" seed="7" result="noise"/>
+      <feGaussianBlur in="noise" stdDeviation="2" result="soft"/>
+      <feDisplacementMap in="SourceGraphic" in2="soft" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>`;
+  document.body.appendChild(svg);
+  document.documentElement.classList.add('glass-refract');
+})();
+
 // ── Init ───────────────────────────────────────────────────────────────────
 (function () {
   const island = document.getElementById('music-island');

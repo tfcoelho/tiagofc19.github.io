@@ -77,13 +77,62 @@ body.light #signature svg {
   fill: #507280; /* ← change this to any color you want */
 }
 
+/* ── Liquid glass ───────────────────────────────────────── */
+:root {
+  --glass-bg: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0.04) 100%), rgba(20,20,20,0.12);
+  --glass-blur: blur(2px) saturate(160%) brightness(1.04);
+  /* Chromium only (see js/player.js): refracts the backdrop through an SVG displacement map */
+  --glass-refract: url(#glass-distort) blur(1.5px) saturate(160%) brightness(1.04);
+  --glass-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.18),
+    inset 0 -1px 1px rgba(255,255,255,0.05),
+    inset 0 0 14px rgba(255,255,255,0.04),
+    0 8px 28px rgba(0,0,0,0.3);
+  --glass-rim: linear-gradient(160deg, rgba(255,255,255,0.22), rgba(255,255,255,0.02) 35%, rgba(255,255,255,0.01) 65%, rgba(255,255,255,0.12));
+}
+
+body.light {
+  --glass-bg: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.) 50%, rgba(255,255,255,0) 100%), rgba(255,255,255,0.);
+  --glass-blur: blur(3px) saturate(100%) brightness(1.08);
+  --glass-refract: url(#glass-distort) blur(1.5px) saturate(160%) brightness(1.08);
+  --glass-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.45),
+    inset 0 -1px 1px rgba(255,255,255,0.15),
+    inset 0 0 14px rgba(255,255,255,0.12),
+    0 8px 28px rgba(0,0,0,0.12);
+  --glass-rim: linear-gradient(160deg, rgba(255,255,255,0.5), rgba(255,255,255,0.06) 35%, rgba(255,255,255,0.03) 65%, rgba(255,255,255,0.3));
+}
+
+html.glass-refract #theme-toggle,
+html.glass-refract #music-island {
+  backdrop-filter: var(--glass-refract);
+}
+
+/* Specular rim: a 1px gradient border drawn with a masked pseudo-element */
+#theme-toggle::before,
+#music-island::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--glass-rim);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* ── Theme toggle ───────────────────────────────────────── */
 #theme-toggle {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   z-index: 10;
-  background: #2e2e2e;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border: none;
   border-radius: 40px;
   padding: 13px;
@@ -92,9 +141,13 @@ body.light #signature svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  transition: opacity 0.8s ease, background 0.5s ease, box-shadow 0.5s ease;
+  box-shadow: var(--glass-shadow);
+  transition: opacity 0.8s ease, background 0.5s ease, box-shadow 0.5s ease,
+              transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
+#theme-toggle:hover  { transform: scale(1.06); }
+#theme-toggle:active { transform: scale(0.94); }
 
 #theme-toggle.visible {
   opacity: 1;
@@ -112,20 +165,8 @@ body.light #signature svg {
   fill: #ffffff;
 }
 
-body.light #theme-toggle {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-}
-
 body.light #theme-toggle svg {
-  fill: rgba(0, 0, 0, 0.6);
   transform: rotate(45deg);
-}
-
-body.light #theme-toggle:hover svg {
-  fill: rgba(0, 0, 0, 0.85);
 }
 
 /* ── About button ───────────────────────────────────────── */
@@ -484,11 +525,13 @@ body.light #portfolio-more:hover {
   left: 50%;
   transform: translateX(-50%) translateY(6px);
   z-index: 20;
-  background: #2e2e2e;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border-radius: 40px;
   overflow: hidden;
   user-select: none;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  box-shadow: var(--glass-shadow);
   width: 220px;
   height: 44px;
   opacity: 0;
@@ -523,21 +566,31 @@ body.light #portfolio-more:hover {
   gap: 8px;
   padding: 0 10px;
   cursor: pointer;
-  transition: opacity 0.15s ease;
 }
 
 #music-island.expanded .island__compact {
-  opacity: 0;
   pointer-events: none;
 }
 
+/* Compact title + indicator crossfade with the expanded content, in sync with the resize */
+.island__compact-title,
+.island__indicator {
+  transition: opacity 0.3s ease 0.1s;
+}
+
+#music-island.expanded .island__compact-title,
+#music-island.expanded .island__indicator {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Placeholder only: keeps the title's spacing. The visible cover is .island__art-lg,
+   which morphs between the small and large positions. */
 .island__art {
   width: 30px;
   height: 30px;
-  border-radius: 5px;
-  object-fit: cover;
   flex-shrink: 0;
-  background: #2a2a2a;
+  visibility: hidden;
 }
 
 .island__compact-title {
@@ -617,15 +670,25 @@ body.light #portfolio-more:hover {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease;
 }
 
 #music-island.expanded .island__full {
-  opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.25s ease 0.22s;
+}
+
+.island__meta,
+.island__progress-row,
+.island__controls {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#music-island.expanded .island__meta,
+#music-island.expanded .island__progress-row,
+#music-island.expanded .island__controls {
+  opacity: 1;
+  transition: opacity 0.3s ease 0.1s;
 }
 
 .island__full-row {
@@ -641,6 +704,14 @@ body.light #portfolio-more:hover {
   object-fit: cover;
   flex-shrink: 0;
   background: #2a2a2a;
+  /* Collapsed: shrink 48px → 30px and slide from (14,12) to the compact slot at (10,7) */
+  transform-origin: top left;
+  transform: translate(-4px, -5px) scale(0.625);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#music-island.expanded .island__art-lg {
+  transform: none;
 }
 
 .island__meta { flex: 1; min-width: 0; }
@@ -731,44 +802,6 @@ body.light #portfolio-more:hover {
 .island__btn-pp .icon-pause { display: none; }
 #music-island.playing .island__btn-pp .icon-play  { display: none; }
 #music-island.playing .island__btn-pp .icon-pause { display: flex; }
-
-/* ── Music Island: light mode ───────────────────────────── */
-body.light #music-island {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-body.light .island__compact-title,
-body.light .island__track-title {
-  color: #111;
-}
-
-body.light .island__track-artist {
-  color: rgba(0, 0, 0, 0.4);
-}
-
-body.light .island__time {
-  color: rgba(0, 0, 0, 0.35);
-}
-
-body.light .island__bars span,
-body.light .island__btn-play,
-body.light .island__btn {
-  color: #111;
-}
-
-body.light .island__bars span { background: #111; }
-
-body.light .island__btn { color: rgba(0, 0, 0, 0.7); }
-body.light .island__btn:hover { color: #000; }
-
-body.light .island__seek {
-  background: rgba(0, 0, 0, 0.15);
-}
-
-body.light .island__seek::-webkit-slider-thumb { background: #111; }
-body.light .island__seek::-moz-range-thumb     { background: #111; }
 
 /* ── Mobile: vertical column labels always visible ──────── */
 @media (max-width: 768px) {
