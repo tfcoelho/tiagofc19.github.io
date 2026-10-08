@@ -528,7 +528,7 @@ body.light #portfolio-more:hover {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border-radius: 40px;
+  border-radius: 22px;
   overflow: hidden;
   user-select: none;
   box-shadow: var(--glass-shadow);
@@ -554,17 +554,20 @@ body.light #portfolio-more:hover {
 #music-island.expanded {
   width: 300px;
   height: 130px;
-  border-radius: 22px;
 }
 
 /* ── Compact state ──────────────────────────────────────── */
+/* Pinned to the top 44px so its contents don't drift while the island's height animates */
 .island__compact {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 10px;
+  padding: 0 15px 0 10px;
   cursor: pointer;
 }
 
@@ -572,23 +575,37 @@ body.light #portfolio-more:hover {
   pointer-events: none;
 }
 
-/* Compact title + indicator crossfade with the expanded content, in sync with the resize */
+/* Crossfade rule (both directions): the incoming element fades in right away,
+   the outgoing one fades out slightly later, so the text never dips/blinks. */
 .island__compact-title,
 .island__indicator {
-  transition: opacity 0.3s ease 0.1s;
+  transition: opacity 0.25s ease;
 }
 
 #music-island.expanded .island__compact-title,
 #music-island.expanded .island__indicator {
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease 0.1s;
+}
+
+/* The two song titles travel toward each other's position while they crossfade,
+   so the name appears to move and grow instead of jumping */
+.island__compact-title {
+  transform-origin: top left;
+  transition: opacity 0.25s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#music-island.expanded .island__compact-title {
+  transform: translate(26px, 5px) scale(1.24);
+  transition: opacity 0.25s ease 0.1s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Placeholder only: keeps the title's spacing. The visible cover is .island__art-lg,
    which morphs between the small and large positions. */
 .island__art {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
+  margin-left: 2px;
   flex-shrink: 0;
   visibility: hidden;
 }
@@ -691,6 +708,18 @@ body.light #portfolio-more:hover {
   transition: opacity 0.3s ease 0.1s;
 }
 
+/* Collapsed: sit where the compact title is (26px left, 5px up, 0.63/0.78 font scale) */
+.island__meta {
+  transform-origin: top left;
+  transform: translate(-26px, -5px) scale(0.81);
+  transition: opacity 0.25s ease 0.1s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#music-island.expanded .island__meta {
+  transform: none;
+  transition: opacity 0.25s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .island__full-row {
   display: flex;
   align-items: center;
@@ -704,14 +733,16 @@ body.light #portfolio-more:hover {
   object-fit: cover;
   flex-shrink: 0;
   background: #2a2a2a;
-  /* Collapsed: shrink 48px → 30px and slide from (14,12) to the compact slot at (10,7) */
+  /* Collapsed: shrink 48px → 26px and slide from (14,12) to the compact slot at (12,9).
+     Collapsing runs a bit faster than the box so the cover never lags into its corner. */
   transform-origin: top left;
-  transform: translate(-4px, -5px) scale(0.625);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(-2px, -3px) scale(0.5417);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #music-island.expanded .island__art-lg {
   transform: none;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .island__meta { flex: 1; min-width: 0; }
