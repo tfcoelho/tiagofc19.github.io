@@ -298,7 +298,7 @@
     { name: 'music',      label: 'Music' },
     { name: 'skateboard', label: 'Skateboard' },
     { name: 'trips',      label: 'Trips' },
-    { name: 'phd-defenses', label: 'PhD Defenses' },
+    { name: 'academic', label: 'Academic' },
   ];
 
   const switcherMenu = document.createElement('div');

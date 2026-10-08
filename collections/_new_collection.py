@@ -82,13 +82,13 @@ def add_js_entry(js_path: Path, array_name: str, slug_key: str, slug: str, line:
     print(f'  {js_path.relative_to(REPO_ROOT)}: added {slug}')
 
 
-def make_cover(src: Path, slug: str, label: str, order: int):
+def make_cover(src: Path, slug: str, label: str, order: int, x: float = 0.5):
     col_dir = COLUMNS_DIR / slug
     col_dir.mkdir(parents=True, exist_ok=True)
     cover = col_dir / 'cover.webp'
     with Image.open(src) as img:
         img = ImageOps.exif_transpose(img).convert('RGB')
-        img = ImageOps.fit(img, COVER_SIZE, Image.Resampling.LANCZOS)
+        img = ImageOps.fit(img, COVER_SIZE, Image.Resampling.LANCZOS, centering=(x, 0.5))
         img.save(cover, 'WEBP', quality=80, method=6)
     print(f'  {cover.relative_to(REPO_ROOT)} from {src.name}')
 
@@ -127,6 +127,8 @@ def main():
     p.add_argument('--more', action='store_true',
                    help='add a homepage column outside the intro, revealed with "More →"')
     p.add_argument('--cover', help='photo to use as homepage cover (default: first portrait photo)')
+    p.add_argument('--cover-x', type=float, default=0.5,
+                   help='horizontal crop of the cover: 0 = keep left side, 1 = keep right side (default 0.5)')
     p.add_argument('--force', action='store_true', help='re-convert photos that already exist')
     args = p.parse_args()
 
@@ -171,7 +173,7 @@ def main():
         if cover_exists and not args.cover:
             print(f'  columns/{slug}/cover.webp already exists — pass --cover to replace it')
         elif cover_src:
-            make_cover(cover_src, slug, label, order)
+            make_cover(cover_src, slug, label, order, args.cover_x)
 
     print(f'\n✓ Done → collections/{slug}/  ({len(webps)} photos)')
     print('  Preview:  python3 -m http.server 8000  →  '

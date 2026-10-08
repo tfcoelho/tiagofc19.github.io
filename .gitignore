@@ -5,6 +5,10 @@ dominio.xlsx
 Images/bg.jpg
 Images/Untitled.png
 
+# Python
+.venv/
+__pycache__/
+
 # Playwright
 node_modules/
 /test-results/
@@ -12,3 +16,5 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+.DS_Store

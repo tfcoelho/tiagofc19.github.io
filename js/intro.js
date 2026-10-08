@@ -28,7 +28,7 @@ const COLUMNS = [
   { slug: 'skateboard', title: 'Skateboard', strips: [1, 2, 3], href: 'collections/skateboard/' },
   { slug: 'trips',      title: 'Trips',      strips: [1, 2, 3], href: 'collections/trips/' },
   // extra: not part of the intro — revealed by sliding the rail with "More"
-  { slug: 'phd-defenses', title: 'PhD Defenses', strips: [1, 2, 3], href: 'collections/phd-defenses/', extra: true },
+  { slug: 'academic', title: 'Academic', strips: [1, 2, 3], href: 'collections/academic/', extra: true },
 ];
 
 const STRIP_DURATION_MS = 500;  // how long each strip is shown
