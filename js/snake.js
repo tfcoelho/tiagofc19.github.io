@@ -196,7 +196,9 @@
     window.addEventListener('keydown', onKey, true);
     window.addEventListener('resize', sizeCanvas);
     backdrop.addEventListener('pointerdown', onPointerDown);
+    backdrop.addEventListener('pointermove', onPointerMove);
     backdrop.addEventListener('pointerup', onPointerUp);
+    backdrop.addEventListener('pointercancel', onPointerUp);
 
     best = 0;
     try { best = +localStorage.getItem('snakeBest') || 0; } catch (e) {}
@@ -482,17 +484,21 @@
     e.stopImmediatePropagation();
   }
 
+  // Swipes turn as soon as the finger has moved SWIPE_PX (no waiting for lift-off).
+  // The origin then resets, so one continuous gesture can chain several turns.
+  const SWIPE_PX = 16;
   let touch = null;
-  function onPointerDown(e) { touch = { x: e.clientX, y: e.clientY }; }
-  function onPointerUp(e) {
+  function onPointerDown(e) { touch = { x: e.clientX, y: e.clientY, swiped: false }; }
+  function onPointerMove(e) {
     if (!touch) return;
     const dx = e.clientX - touch.x, dy = e.clientY - touch.y;
-    touch = null;
-    if (Math.hypot(dx, dy) < 24) {
-      if (phase === 'over') retry();
-      return;
-    }
+    if (Math.hypot(dx, dy) < SWIPE_PX) return;
     play(Math.abs(dx) > Math.abs(dy) ? { x: Math.sign(dx), y: 0 } : { x: 0, y: Math.sign(dy) });
+    touch = { x: e.clientX, y: e.clientY, swiped: true };
+  }
+  function onPointerUp() {
+    if (touch && !touch.swiped && phase === 'over') retry();
+    touch = null;
   }
 
   // ── Exit ───────────────────────────────────────────────────
