@@ -31,7 +31,8 @@
   // ── Styles ─────────────────────────────────────────────────
   const style = document.createElement('style');
   style.textContent = `
-    #signature.visible svg { pointer-events: auto; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+    /* touch-action: manipulation stops double-tap-to-zoom from eating the taps on phones */
+    #signature.visible svg { pointer-events: auto; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
     #snake-backdrop {
       position: fixed; inset: 0; z-index: 14; opacity: 0;
       background: rgba(0,0,0,0.4);
